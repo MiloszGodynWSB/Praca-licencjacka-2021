@@ -1,5 +1,5 @@
+use movieselector;
 create table if not exists series (movieID int not null unique,
-                                   imdbID varchar(20),
                                    ActionAdventure int not null default 0,
                                    Animation int not null default 0,
                                    Comedy int not null default 0,
