@@ -15,12 +15,12 @@ class DB:
         )
         self.cursor = self.database.cursor()
 
-    def insert(self, values):
+    def insert(self, table, genres, values):
         
-        sql = "insert into movies values ()"
-
+        sql = "insert into " + table + "(" + genres + ")" + " values (" + values + ")"
+        print(sql)
         self.cursor.execute("use movieselector")
-        self.cursor.execute(sql, val)
+        self.cursor.execute(sql)
         self.database.commit()
 
         print(self.cursor.rowcount, "record inserted.")
