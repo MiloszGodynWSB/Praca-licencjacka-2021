@@ -2,7 +2,7 @@ import DB as database
 import JsonFile as file
 import os, glob, threading
 
-x = database.DB("localhost","root","Figo5252")
+x = database.DB("localhost","root","passToChange")
 x.connect()
 
 moviesExcept = 0
@@ -53,14 +53,6 @@ def loadTV():
             continue
 
 
-
-# movieThread = threading.Thread(target=loadMovies)
-# seriesThread = threading.Thread(target=loadTV)
-
-# movieThread.start()
-# seriesThread.start()
-# movieThread.join()
-# seriesThread.join()
 
 loadMovies()
 loadTV()
