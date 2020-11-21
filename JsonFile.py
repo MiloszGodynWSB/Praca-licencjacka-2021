@@ -15,6 +15,7 @@ class JsonFile:
         returnGenres = ""
         prevName = []
         self.repeatNames = 0
+        self.doubleGenre = 0
         for genre in self.data["genres"]:
             #This can be replaced with a dictionary
             if genre["name"] not in prevName:
@@ -23,9 +24,29 @@ class JsonFile:
                 elif genre["name"] == "TV Movie":
                     returnGenres = returnGenres + "TVMovie" + ", "
                 elif genre["name"] == "Action & Adventure":
-                    returnGenres = returnGenres + "ActionAdventure" + ", "
-                elif genre["name"] == "SciFiFantasy":
-                    returnGenres = returnGenres + "ActionAdventure" + ", "
+                    if "Adventure" not in prevName:
+                        returnGenres = returnGenres + "Adventure" + ", "
+                    else:
+                        self.repeatNames = self.repeatNames + 1
+                    if "Action" not in prevName:
+                        returnGenres = returnGenres + "Action" + ", "
+                    else:
+                        self.repeatNames = self.repeatNames + 1
+                    prevName.append("Action")
+                    prevName.append("Adventure")
+                    self.doubleGenre = self.doubleGenre + 1
+                elif genre["name"] == "Sci-Fi & Fantasy":
+                    if "Science Fiction" not in prevName:
+                        returnGenres = returnGenres + "ScienceFiction" + ", "
+                    else:
+                        self.repeatNames = self.repeatNames + 1
+                    if "Fantasy" not in prevName:
+                        returnGenres = returnGenres + "Fantasy" + ", "
+                    else:
+                        self.repeatNames = self.repeatNames + 1
+                    prevName.append("Science Fiction")
+                    prevName.append("Fantasy")
+                    self.doubleGenre = self.doubleGenre + 1
                 elif genre["name"] == "War & Politics":
                     returnGenres = returnGenres + "War" + ", "
                 else:
@@ -40,6 +61,6 @@ class JsonFile:
     
     def getGenresCountString(self):
         genreCountStr = ""
-        for x in range(self.getGenresCount() - self.repeatNames):
+        for x in range(self.getGenresCount() - self.repeatNames + self.doubleGenre):
             genreCountStr = genreCountStr + "1, "
         return genreCountStr.rstrip(', ')

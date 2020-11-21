@@ -24,3 +24,6 @@ class DB:
         self.database.commit()
 
         print(self.cursor.rowcount, "record inserted.")
+
+    def commit(self):
+        self.database.commit()
