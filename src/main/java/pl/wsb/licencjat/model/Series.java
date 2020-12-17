@@ -1,8 +1,5 @@
 package pl.wsb.licencjat.model;
 
-import lombok.Getter;
-import lombok.Setter;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -10,7 +7,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "series")
-public class Series {
+public class Series extends Media {
     
     @Id
     @Column(name = "movieID")
@@ -40,10 +37,14 @@ public class Series {
     private int war;
     private int western;
 
+    public Series() {
+        this.mediaType = MediaType.SERIES;
+    }
+
     @Override
     public String toString() {
         return "Series{" +
-                "movieID=" + id +
+                "id=" + id +
                 ", action=" + action +
                 ", adventure=" + adventure +
                 ", animation=" + animation +
@@ -68,8 +69,7 @@ public class Series {
                 ", tvMovie=" + tvMovie +
                 ", war=" + war +
                 ", western=" + western +
+                ", mediaType=" + mediaType +
                 '}';
     }
-
-
 }

@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import pl.wsb.licencjat.model.Movie;
 import pl.wsb.licencjat.repository.MovieRepository;
 
-import java.util.List;
 import java.util.Optional;
 
 @Controller
@@ -30,7 +29,6 @@ public class MovieController {
             return "redirect:/";
         }
         Optional<Movie> movie = movieRepository.findById(longId);
-        Movie movie1 = new Movie();
         movie.ifPresentOrElse(
                 p -> System.out.println(p.toString()),
                 () -> System.out.println("Nie ma takiego filmu")

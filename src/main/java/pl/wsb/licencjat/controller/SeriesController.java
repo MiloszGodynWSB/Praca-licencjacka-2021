@@ -20,7 +20,7 @@ public class SeriesController {
     }
 
     @GetMapping(value = "/series/{id}")
-    String getMovie(@PathVariable String id) {
+    String getSeries(@PathVariable String id) {
         Long longId;
         try {
             longId = Long.parseLong(id);
@@ -29,7 +29,6 @@ public class SeriesController {
             return "redirect:/";
         }
         Optional<Series> movie = seriesRepository.findById(longId);
-        Series serie1 = new Series();
         movie.ifPresentOrElse(
                 p -> System.out.println(p.toString()),
                 () -> System.out.println("Nie ma takiego filmu")
