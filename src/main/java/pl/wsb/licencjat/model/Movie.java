@@ -12,24 +12,24 @@ public class Movie extends Media {
     @Id
     @Column(name = "movieID")
     private long id;
-    private int action;
-    private int adventure;
-    private int comedy;
-    private int crime;
-    private int documentary;
-    private int drama;
-    private int family;
-    private int fantasy;
-    private int history;
-    private int horror;
-    private int music;
-    private int mystery;
-    private int romance;
-    private int scienceFiction;
-    private int tvMovie;
+    private int Action;
+    private int Adventure;
+    private int Comedy;
+    private int Crime;
+    private int Documentary;
+    private int Drama;
+    private int Family;
+    private int Fantasy;
+    private int History;
+    private int Horror;
+    private int Music;
+    private int Mystery;
+    private int Romance;
+    private int ScienceFiction;
+    private int TvMovie;
     private int thriller;
-    private int war;
-    private int western;
+    private int War;
+    private int Western;
 
     public Movie() {
         this.mediaType = MediaType.MOVIE;
@@ -39,24 +39,24 @@ public class Movie extends Media {
     public String toString() {
         return "Movie{" +
                 "movieID=" + id +
-                ", action=" + action +
-                ", adventure=" + adventure +
-                ", comedy=" + comedy +
-                ", crime=" + crime +
-                ", documentary=" + documentary +
-                ", drama=" + drama +
-                ", family=" + family +
-                ", fantasy=" + fantasy +
-                ", history=" + history +
-                ", horror=" + horror +
-                ", music=" + music +
-                ", mystery=" + mystery +
-                ", romance=" + romance +
-                ", scienceFiction=" + scienceFiction +
-                ", tvMovie=" + tvMovie +
+                ", action=" + Action +
+                ", adventure=" + Adventure +
+                ", comedy=" + Comedy +
+                ", crime=" + Crime +
+                ", documentary=" + Documentary +
+                ", drama=" + Drama +
+                ", family=" + Family +
+                ", fantasy=" + Fantasy +
+                ", history=" + History +
+                ", horror=" + Horror +
+                ", music=" + Music +
+                ", mystery=" + Mystery +
+                ", romance=" + Romance +
+                ", scienceFiction=" + ScienceFiction +
+                ", tvMovie=" + TvMovie +
                 ", thriller=" + thriller +
-                ", war=" + war +
-                ", western=" + western +
+                ", war=" + War +
+                ", western=" + Western +
                 ", mediaType=" + mediaType +
                 '}';
     }
