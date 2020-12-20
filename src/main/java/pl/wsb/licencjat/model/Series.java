@@ -1,5 +1,7 @@
 package pl.wsb.licencjat.model;
 
+import pl.wsb.licencjat.model.enumerations.MediaType;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;

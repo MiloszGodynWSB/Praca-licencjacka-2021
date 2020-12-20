@@ -1,15 +1,13 @@
 package pl.wsb.licencjat.model;
 
-abstract class Media {
+import pl.wsb.licencjat.model.enumerations.MediaType;
+
+public abstract class Media {
 
     protected MediaType mediaType;
 
     MediaType getMediaType() {
         return mediaType;
     };
-
-    enum MediaType {
-        MOVIE, SERIES;
-    }
 
 }
