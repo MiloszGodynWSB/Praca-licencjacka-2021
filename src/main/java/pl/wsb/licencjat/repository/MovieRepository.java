@@ -2,7 +2,7 @@ package pl.wsb.licencjat.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-import pl.wsb.licencjat.model.Movie;
+import pl.wsb.licencjat.model.database.Movie;
 
 import java.util.Optional;
 

@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import pl.wsb.licencjat.model.Movie;
+import pl.wsb.licencjat.model.database.Movie;
 import pl.wsb.licencjat.repository.MovieRepository;
 
 import java.util.Optional;
@@ -21,7 +21,7 @@ public class MovieController {
 
     @GetMapping(value = "/movies/{id}")
     String getMovie(@PathVariable String id) {
-        Long longId;
+        long longId;
         try {
             longId = Long.parseLong(id);
         } catch (NumberFormatException e) {

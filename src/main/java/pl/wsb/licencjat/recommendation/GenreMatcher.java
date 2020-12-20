@@ -3,8 +3,8 @@ package pl.wsb.licencjat.recommendation;
 import java.util.List;
 import java.util.Map;
 
-import pl.wsb.licencjat.model.Movie;
-import pl.wsb.licencjat.model.Series;
+import pl.wsb.licencjat.model.database.Movie;
+import pl.wsb.licencjat.model.database.Series;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;

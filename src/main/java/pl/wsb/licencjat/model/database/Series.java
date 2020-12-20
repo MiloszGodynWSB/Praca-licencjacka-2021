@@ -1,5 +1,6 @@
-package pl.wsb.licencjat.model;
+package pl.wsb.licencjat.model.database;
 
+import pl.wsb.licencjat.model.Media;
 import pl.wsb.licencjat.model.enumerations.MediaType;
 
 import javax.persistence.Column;
@@ -10,7 +11,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "series")
 public class Series extends Media {
-    
+
     @Id
     @Column(name = "movieID")
     private long id;
@@ -31,7 +32,7 @@ public class Series extends Media {
     private int news;
     private int romance;
     private int scienceFiction;
-    private int reality       ;
+    private int reality;
     private int soap;
     private int thriller;
     private int talk;

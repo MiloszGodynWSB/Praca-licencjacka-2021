@@ -1,5 +1,6 @@
-package pl.wsb.licencjat.model;
+package pl.wsb.licencjat.model.database;
 
+import pl.wsb.licencjat.model.Media;
 import pl.wsb.licencjat.model.enumerations.MediaType;
 
 import javax.persistence.Column;

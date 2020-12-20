@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import pl.wsb.licencjat.model.Series;
+import pl.wsb.licencjat.model.database.Series;
 import pl.wsb.licencjat.repository.SeriesRepository;
 
 import java.util.Optional;
@@ -21,7 +21,7 @@ public class SeriesController {
 
     @GetMapping(value = "/series/{id}")
     String getSeries(@PathVariable String id) {
-        Long longId;
+        long longId;
         try {
             longId = Long.parseLong(id);
         } catch (NumberFormatException e) {
