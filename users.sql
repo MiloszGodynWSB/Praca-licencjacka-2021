@@ -1,6 +1,6 @@
 create table users
 (
-    ID       int          not null,
+    ID       int          not null auto_increment,
     username varchar(255) not null,
     password varchar(255) not null,
     constraint users_ID_uindex
