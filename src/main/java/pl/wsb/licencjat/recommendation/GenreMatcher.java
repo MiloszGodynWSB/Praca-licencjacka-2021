@@ -3,6 +3,7 @@ package pl.wsb.licencjat.recommendation;
 import java.util.List;
 import java.util.Map;
 
+import pl.wsb.licencjat.model.enumerations.MediaType;
 import pl.wsb.licencjat.model.database.Movie;
 import pl.wsb.licencjat.model.database.Series;
 
@@ -11,50 +12,31 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
 
-public class GenreMatcher {
-    private String user;
-    private List<String> genres;
-    private String type; //either movie or a series
-    private Map<String, Long> results;
-    private EntityManagerFactory emFactory;
+public abstract class GenreMatcher<T> {
+    protected String user;
+    protected List<String> genres;
+    protected Map<String, Long> results;
+    protected EntityManagerFactory emFactory;
+    protected List<T> media;
+    protected String selectMoviesQuery;
     EntityManager entityManager;
-    private List<Series> tvShows;
-    private List<Movie> movies;
+
 
     public GenreMatcher() {
         emFactory = Persistence.createEntityManagerFactory("spring-jpa-pu");
         entityManager = emFactory.createEntityManager();
     }
 
-    long id;
-
-    public void setGenrePreference(String user, List<String> genres, String type) {
+    public void setGenrePreference(String user, List<String> genres) {
         this.user = user;
         this.genres = genres;
-        this.type = type;
     }
 
-    void getMovies() {
-        long movieID = 0;
-        System.out.println(this.type);
-        String selectMovies = "select c from " + "Movie" + " c where ";
-        for (String genre: genres) {
-            selectMovies =  selectMovies + "c." + genre + "=1 and ";
-        }
-        selectMovies = selectMovies.substring(0, selectMovies.length()-5);
-        System.out.println(selectMovies);
-        Query query = entityManager.createQuery(selectMovies);
-        if(type == "Movie") {
-            movies = query.getResultList();
-        }
-        else {
-            tvShows = query.getResultList();
-        }
-    }
+    protected abstract void getMovies();
 
-    public List<Movie> getShit() {
+    public List<T> getShit() {
         getMovies();
-        return movies;
+        return media;
     }
 
 }

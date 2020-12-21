@@ -7,7 +7,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.client.RestTemplate;
 import pl.wsb.licencjat.model.database.Movie;
+import pl.wsb.licencjat.model.database.Series;
 import pl.wsb.licencjat.recommendation.GenreMatcher;
+import pl.wsb.licencjat.recommendation.GenreMatcherMovies;
+import pl.wsb.licencjat.recommendation.GenreMatcherSeries;
 import pl.wsb.licencjat.services.TmdbApiConsumer;
 
 import java.util.ArrayList;
@@ -22,19 +25,31 @@ public class DebugController {
 
     @Autowired
     public DebugController(TmdbApiConsumer tmdbApiConsumer) {
-        this.genreMatcher = new GenreMatcher();
         this.tmdbApiConsumer = tmdbApiConsumer;
     }
 
-    @GetMapping(value = "/genres/{genre1}/{genre2}")
+    @GetMapping(value = "/movieGenres/{genre1}/{genre2}")
     String getMovie(@PathVariable("genre1") String genre1, @PathVariable("genre2") String genre2) {
-
+        genreMatcher = new GenreMatcherMovies();
         List<String> lista = new ArrayList<>();
         lista.add(genre1);
         lista.add(genre2);
-        genreMatcher.setGenrePreference("user", List.of(genre1, genre2), "Movie");
+        genreMatcher.setGenrePreference("user", List.of(genre1, genre2));
 
         List<Movie> movie = genreMatcher.getShit();
+        System.out.println(movie.size());
+        return "redirect:/";
+    }
+
+    @GetMapping(value = "/seriesGenres/{genre1}/{genre2}")
+    String getSeries(@PathVariable("genre1") String genre1, @PathVariable("genre2") String genre2) {
+        genreMatcher = new GenreMatcherSeries();
+        List<String> lista = new ArrayList<>();
+        lista.add(genre1);
+        lista.add(genre2);
+        genreMatcher.setGenrePreference("user", List.of(genre1, genre2));
+
+        List<Series> movie = genreMatcher.getShit();
         System.out.println(movie.size());
         return "redirect:/";
     }
