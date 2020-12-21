@@ -11,29 +11,29 @@ public class SeriesProfiles {
 
     @Id
     @Column(name = "userID")
-    private long userID;
-    private int action;
-    private int adventure;
-    private int animation;
-    private int comedy;
-    private int crime;
-    private int documentary;
-    private int drama;
-    private int family;
-    private int fantasy;
-    private int history;
-    private int horror;
-    private int kids;
-    private int music;
-    private int mystery;
-    private int news;
-    private int romance;
-    private int scienceFiction;
-    private int reality;
-    private int soap;
-    private int thriller;
-    private int talk;
-    private int tvMovie;
-    private int war;
-    private int western;
+    public long userID;
+    public int action;
+    public int adventure;
+    public int animation;
+    public int comedy;
+    public int crime;
+    public int documentary;
+    public int drama;
+    public int family;
+    public int fantasy;
+    public int history;
+    public int horror;
+    public int kids;
+    public int music;
+    public int mystery;
+    public int news;
+    public int romance;
+    public int scienceFiction;
+    public int reality;
+    public int soap;
+    public int thriller;
+    public int talk;
+    public int tvMovie;
+    public int war;
+    public int western;
 }

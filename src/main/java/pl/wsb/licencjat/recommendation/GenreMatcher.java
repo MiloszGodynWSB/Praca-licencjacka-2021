@@ -1,7 +1,7 @@
 package pl.wsb.licencjat.recommendation;
 
 import java.util.List;
-import java.util.Map;
+import java.util.SortedMap;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -10,10 +10,11 @@ import javax.persistence.Persistence;
 public abstract class GenreMatcher<T> {
     protected long userID;
     protected List<String> genres;
-    protected Map<String, Long> results;
+    protected SortedMap<Long, Integer> results;
     protected EntityManagerFactory emFactory;
     protected List<T> media;
     protected String selectMoviesQuery;
+    protected Long foundID;
     EntityManager entityManager;
 
 
@@ -28,13 +29,16 @@ public abstract class GenreMatcher<T> {
     }
 
     protected abstract void getMovies();
-    protected abstract void calculateDotProducts();
+    protected abstract int calculateDotProduct(T movie);
     protected abstract void getUserData();
+    protected abstract void matchMovies();
 
 
-    public List<T> getShit() {
+    public Long getShit() {
         getMovies();
-        return media;
+        getUserData();
+        matchMovies();
+        return foundID;
     }
 
 }

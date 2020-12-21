@@ -14,25 +14,25 @@ public class Movie extends Media {
 
     @Id
     @Column(name = "movieID")
-    private long id;
-    private int Action;
-    private int Adventure;
-    private int Comedy;
-    private int Crime;
-    private int Documentary;
-    private int Drama;
-    private int Family;
-    private int Fantasy;
-    private int History;
-    private int Horror;
-    private int Music;
-    private int Mystery;
-    private int Romance;
-    private int ScienceFiction;
-    private int TvMovie;
-    private int thriller;
-    private int War;
-    private int Western;
+    public long id;
+    public int Action;
+    public int Adventure;
+    public int Comedy;
+    public int Crime;
+    public int Documentary;
+    public int Drama;
+    public int Family;
+    public int Fantasy;
+    public int History;
+    public int Horror;
+    public int Music;
+    public int Mystery;
+    public int Romance;
+    public int ScienceFiction;
+    public int TvMovie;
+    public int thriller;
+    public int War;
+    public int Western;
 
     public Movie() {
         this.mediaType = MediaType.MOVIE;

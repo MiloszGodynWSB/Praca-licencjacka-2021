@@ -1,5 +1,6 @@
 package pl.wsb.licencjat.recommendation;
 
+import pl.wsb.licencjat.model.database.MoviesProfiles;
 import pl.wsb.licencjat.model.database.Series;
 import pl.wsb.licencjat.model.database.SeriesProfiles;
 
@@ -8,7 +9,7 @@ import java.util.List;
 
 public class GenreMatcherSeries extends GenreMatcher<Series> {
 
-    private List<SeriesProfiles> userData;
+    private SeriesProfiles userData;
 
     protected void getMovies() {
         selectMoviesQuery = "select c from " + "Series" + " c where ";
@@ -22,10 +23,17 @@ public class GenreMatcherSeries extends GenreMatcher<Series> {
     }
 
     protected void getUserData() {
-
+        String userQuery = "select c from" + "SeriesProfiles" + "c where c.userID=" + userID;
+        Query query = entityManager.createQuery(userQuery);
+        List<SeriesProfiles> data = query.getResultList();
+        userData = data.get(0);
     }
 
-    protected  void calculateDotProducts() {
+    protected int calculateDotProduct(Series movie) {
+        return 0;
+    }
+
+    protected void matchMovies() {
 
     }
 }

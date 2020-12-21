@@ -36,9 +36,8 @@ public class DebugController {
         lista.add(genre2);
         genreMatcher.setGenrePreference(1, List.of(genre1, genre2));
 
-        List<Movie> movies = genreMatcher.getShit();
-        System.out.println(movies.size());
-        System.out.println(movies.get(0).toString());
+        Long movie = genreMatcher.getShit();
+        System.out.println(movie);
         return "redirect:/";
     }
 
@@ -50,8 +49,8 @@ public class DebugController {
         lista.add(genre2);
         genreMatcher.setGenrePreference(1, List.of(genre1, genre2));
 
-        List<Series> movies = genreMatcher.getShit();
-        System.out.println(movies.size());
+        Long movie = genreMatcher.getShit();
+        System.out.println(movie);
         return "redirect:/";
     }
 
