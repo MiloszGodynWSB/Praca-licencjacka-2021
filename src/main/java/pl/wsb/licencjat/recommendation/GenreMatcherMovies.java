@@ -34,31 +34,31 @@ public class GenreMatcherMovies extends GenreMatcher<Movie> {
     }
 
     protected int calculateDotProduct(Movie movie) {
-        return userData.Action * movie.Action +
-                userData.Adventure * movie.Adventure +
-                userData.Animation * movie.Animation +
-                userData.Drama * movie.Drama +
-                userData.Comedy * movie.Comedy +
-                userData.Crime * movie.Crime +
-                userData.Documentary * movie.Documentary +
-                userData.Family * movie.Documentary +
-                userData.Fantasy * movie.Fantasy +
-                userData.History * movie.History +
-                userData.Horror * movie.Horror +
-                userData.Music * movie.Music +
-                userData.Mystery * movie.Mystery +
-                userData.Romance * movie.Romance +
-                userData.ScienceFiction * movie.ScienceFiction +
-                userData.thriller * movie.thriller +
-                userData.TvMovie * movie.TvMovie +
-                userData.War * movie.War +
-                userData.Western * movie.Western;
+        return userData.getAction() * movie.getAction() +
+                userData.getAdventure() * movie.getAdventure() +
+                userData.getAnimation() * movie.getAnimation() +
+                userData.getDrama() * movie.getDrama() +
+                userData.getComedy() * movie.getComedy() +
+                userData.getCrime() * movie.getCrime() +
+                userData.getDocumentary() * movie.getDocumentary() +
+                userData.getFamily() * movie.getFamily() +
+                userData.getFantasy() * movie.getFantasy() +
+                userData.getHistory() * movie.getHistory() +
+                userData.getHorror() * movie.getHorror() +
+                userData.getMusic() * movie.getMusic() +
+                userData.getMystery() * movie.getMystery() +
+                userData.getRomance() * movie.getRomance() +
+                userData.getScienceFiction() * movie.getScienceFiction() +
+                userData.getThriller() * movie.getThriller() +
+                userData.getTvMovie() * movie.getTvMovie() +
+                userData.getWar() * movie.getWar() +
+                userData.getWestern() * movie.getWestern();
     }
 
     protected void matchMovies() {
         for(Movie movie : media) {
             results.put(
-                    movie.id,
+                    movie.getId(),
                     calculateDotProduct(movie)
                     );
         }
