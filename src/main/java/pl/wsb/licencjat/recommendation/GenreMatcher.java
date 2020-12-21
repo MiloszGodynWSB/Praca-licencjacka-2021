@@ -36,7 +36,7 @@ public abstract class GenreMatcher<T> {
     protected abstract void matchMovies();
 
 
-    public Long getShit() {
+    public Long getRecommendation() {
         getMovies();
         getUserData();
         matchMovies();

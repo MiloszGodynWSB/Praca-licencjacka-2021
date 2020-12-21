@@ -6,8 +6,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.client.RestTemplate;
-import pl.wsb.licencjat.model.database.Movie;
-import pl.wsb.licencjat.model.database.Series;
 import pl.wsb.licencjat.recommendation.GenreMatcher;
 import pl.wsb.licencjat.recommendation.GenreMatcherMovies;
 import pl.wsb.licencjat.recommendation.GenreMatcherSeries;
@@ -36,7 +34,7 @@ public class DebugController {
         lista.add(genre2);
         genreMatcher.setGenrePreference(1, List.of(genre1, genre2));
 
-        Long movie = genreMatcher.getShit();
+        Long movie = genreMatcher.getRecommendation();
         System.out.println(movie);
         return "redirect:/";
     }
@@ -49,7 +47,7 @@ public class DebugController {
         lista.add(genre2);
         genreMatcher.setGenrePreference(1, List.of(genre1, genre2));
 
-        Long movie = genreMatcher.getShit();
+        Long movie = genreMatcher.getRecommendation();
         System.out.println(movie);
         return "redirect:/";
     }
