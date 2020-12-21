@@ -2,22 +2,18 @@ package pl.wsb.licencjat.model.tmdb;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
-import pl.wsb.licencjat.model.Media;
-import pl.wsb.licencjat.model.enumerations.MediaType;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
+@NoArgsConstructor
 @Getter
 @Setter
-public class TmdbSeries extends Media {
+public class TmdbSeries {
 
     private String name;
     private String tagline;
     private String overview;
-
-    public TmdbSeries() {
-        this.mediaType = MediaType.SERIES;
-    }
 
     @Override
     public String toString() {
