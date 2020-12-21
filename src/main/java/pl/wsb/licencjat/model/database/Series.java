@@ -13,7 +13,7 @@ import javax.persistence.Table;
 public class Series extends Media {
 
     @Id
-    @Column(name = "movieID")
+    @Column(name = "seriesID")
     private long id;
     private int action;
     private int adventure;
