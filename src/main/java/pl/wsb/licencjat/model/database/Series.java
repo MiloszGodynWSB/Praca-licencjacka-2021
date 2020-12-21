@@ -1,7 +1,7 @@
 package pl.wsb.licencjat.model.database;
 
-import pl.wsb.licencjat.model.Media;
-import pl.wsb.licencjat.model.enumerations.MediaType;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,7 +10,9 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "series")
-public class Series extends Media {
+@NoArgsConstructor
+@Setter
+public class Series {
 
     @Id
     @Column(name = "movieID")
@@ -140,10 +142,6 @@ public class Series extends Media {
         return western;
     }
 
-    public Series() {
-        this.mediaType = MediaType.SERIES;
-    }
-
     @Override
     public String toString() {
         return "Series{" +
@@ -172,7 +170,6 @@ public class Series extends Media {
                 ", tvMovie=" + tvMovie +
                 ", war=" + war +
                 ", western=" + western +
-                ", mediaType=" + mediaType +
                 '}';
     }
 }
