@@ -3,17 +3,12 @@ package pl.wsb.licencjat.recommendation;
 import java.util.List;
 import java.util.Map;
 
-import pl.wsb.licencjat.model.enumerations.MediaType;
-import pl.wsb.licencjat.model.database.Movie;
-import pl.wsb.licencjat.model.database.Series;
-
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
-import javax.persistence.Query;
 
 public abstract class GenreMatcher<T> {
-    protected String user;
+    protected long userID;
     protected List<String> genres;
     protected Map<String, Long> results;
     protected EntityManagerFactory emFactory;
@@ -27,12 +22,15 @@ public abstract class GenreMatcher<T> {
         entityManager = emFactory.createEntityManager();
     }
 
-    public void setGenrePreference(String user, List<String> genres) {
-        this.user = user;
+    public void setGenrePreference(long user, List<String> genres) {
+        this.userID = user;
         this.genres = genres;
     }
 
     protected abstract void getMovies();
+    protected abstract void calculateDotProducts();
+    protected abstract void getUserData();
+
 
     public List<T> getShit() {
         getMovies();

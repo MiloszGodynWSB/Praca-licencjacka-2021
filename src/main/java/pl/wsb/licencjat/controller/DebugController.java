@@ -34,10 +34,11 @@ public class DebugController {
         List<String> lista = new ArrayList<>();
         lista.add(genre1);
         lista.add(genre2);
-        genreMatcher.setGenrePreference("user", List.of(genre1, genre2));
+        genreMatcher.setGenrePreference(1, List.of(genre1, genre2));
 
-        List<Movie> movie = genreMatcher.getShit();
-        System.out.println(movie.size());
+        List<Movie> movies = genreMatcher.getShit();
+        System.out.println(movies.size());
+        System.out.println(movies.get(0).toString());
         return "redirect:/";
     }
 
@@ -47,10 +48,10 @@ public class DebugController {
         List<String> lista = new ArrayList<>();
         lista.add(genre1);
         lista.add(genre2);
-        genreMatcher.setGenrePreference("user", List.of(genre1, genre2));
+        genreMatcher.setGenrePreference(1, List.of(genre1, genre2));
 
-        List<Series> movie = genreMatcher.getShit();
-        System.out.println(movie.size());
+        List<Series> movies = genreMatcher.getShit();
+        System.out.println(movies.size());
         return "redirect:/";
     }
 
