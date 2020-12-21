@@ -2,7 +2,6 @@ package pl.wsb.licencjat.recommendation;
 
 import pl.wsb.licencjat.model.database.Movie;
 import pl.wsb.licencjat.model.database.MoviesProfiles;
-import pl.wsb.licencjat.recommendation.GenreMatcher;
 
 import javax.persistence.Query;
 import java.util.Collections;

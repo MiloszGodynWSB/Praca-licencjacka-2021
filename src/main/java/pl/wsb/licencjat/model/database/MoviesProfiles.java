@@ -28,7 +28,7 @@ public class MoviesProfiles {
     private int Romance;
     private int ScienceFiction;
     private int TvMovie;
-    private int thriller;
+    private int Thriller;
     private int War;
     private int Western;
 
@@ -101,7 +101,7 @@ public class MoviesProfiles {
     }
 
     public int getThriller() {
-        return thriller;
+        return Thriller;
     }
 
     public int getWar() {
@@ -130,7 +130,7 @@ public class MoviesProfiles {
                 ", romance=" + Romance +
                 ", scienceFiction=" + ScienceFiction +
                 ", tvMovie=" + TvMovie +
-                ", thriller=" + thriller +
+                ", thriller=" + Thriller +
                 ", war=" + War +
                 ", western=" + Western +
                 '}';
