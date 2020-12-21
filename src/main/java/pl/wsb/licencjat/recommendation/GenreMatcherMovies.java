@@ -36,6 +36,7 @@ public class GenreMatcherMovies extends GenreMatcher<Movie> {
     protected int calculateDotProduct(Movie movie) {
         return userData.Action * movie.Action +
                 userData.Adventure * movie.Adventure +
+                userData.Animation * movie.Animation +
                 userData.Drama * movie.Drama +
                 userData.Comedy * movie.Comedy +
                 userData.Crime * movie.Crime +
@@ -56,12 +57,12 @@ public class GenreMatcherMovies extends GenreMatcher<Movie> {
 
     protected void matchMovies() {
         for(Movie movie : media) {
-            System.out.println(movie);
             results.put(
                     movie.id,
                     calculateDotProduct(movie)
                     );
         }
+
         foundID = Collections.max(results.entrySet(), SortedMap.Entry.comparingByValue()).getKey();
     }
 }

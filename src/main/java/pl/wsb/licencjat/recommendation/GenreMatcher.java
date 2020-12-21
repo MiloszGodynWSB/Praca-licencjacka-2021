@@ -2,6 +2,7 @@ package pl.wsb.licencjat.recommendation;
 
 import java.util.List;
 import java.util.SortedMap;
+import java.util.TreeMap;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -21,6 +22,7 @@ public abstract class GenreMatcher<T> {
     public GenreMatcher() {
         emFactory = Persistence.createEntityManagerFactory("spring-jpa-pu");
         entityManager = emFactory.createEntityManager();
+        results = new TreeMap<Long, Integer>();
     }
 
     public void setGenrePreference(long user, List<String> genres) {

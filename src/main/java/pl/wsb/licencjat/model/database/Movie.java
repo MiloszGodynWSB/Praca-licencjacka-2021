@@ -17,6 +17,7 @@ public class Movie extends Media {
     public long id;
     public int Action;
     public int Adventure;
+    public int Animation;
     public int Comedy;
     public int Crime;
     public int Documentary;
