@@ -6,9 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.client.RestTemplate;
-import pl.wsb.licencjat.recommendation.GenreMatcher;
-import pl.wsb.licencjat.recommendation.GenreMatcherMovies;
-import pl.wsb.licencjat.recommendation.GenreMatcherSeries;
+import pl.wsb.licencjat.recommendation.*;
 import pl.wsb.licencjat.services.TmdbApiConsumer;
 
 import java.util.ArrayList;
@@ -20,6 +18,7 @@ public class DebugController {
 
     private GenreMatcher genreMatcher;
     private TmdbApiConsumer tmdbApiConsumer;
+    private ProfileUpdater profileUpdater;
 
     @Autowired
     public DebugController(TmdbApiConsumer tmdbApiConsumer) {
@@ -51,6 +50,21 @@ public class DebugController {
         System.out.println(movie);
         return "redirect:/";
     }
+
+    @GetMapping(value = "/score/movie/{userID}/{movieID}/{liked}")
+    String updateMovieProfile(@PathVariable("userID") long userID, @PathVariable("movieID") long movieID, @PathVariable("liked") int liked) {
+        profileUpdater = new MovieProfileUpdater(userID);
+        profileUpdater.ModifyProfile(movieID, liked);
+        return "redirect:/";
+    }
+
+    @GetMapping(value = "/score/series/{userID}/{movieID}/{liked}")
+    String updateSeriesProfile(@PathVariable("userID") long userID, @PathVariable("movieID") long movieID, @PathVariable("liked") int liked) {
+        profileUpdater = new SeriesProfileUpdater(userID);
+        profileUpdater.ModifyProfile(movieID, liked);
+        return "redirect:/";
+    }
+
 
     @GetMapping(value = "/tmdb/api/movie/{id}")
     String consumeTmdbApiMovie(@PathVariable String id, RestTemplate restTemplate) {

@@ -32,6 +32,86 @@ public class MoviesProfiles {
     private int War;
     private int Western;
 
+    public void setUserID(long userID) {
+        this.userID = userID;
+    }
+
+    public void increaseAction(int action) {
+        Action += action;
+    }
+
+    public void increaseAdventure(int adventure) {
+        Adventure += adventure;
+    }
+
+    public void increaseAnimation(int animation) {
+        Animation += animation;
+    }
+
+    public void increaseComedy(int comedy) {
+        Comedy += comedy;
+    }
+
+    public void increaseCrime(int crime) {
+        Crime += crime;
+    }
+
+    public void increaseDocumentary(int documentary) {
+        Documentary += documentary;
+    }
+
+    public void increaseDrama(int drama) {
+        Drama += drama;
+    }
+
+    public void increaseFamily(int family) {
+        Family += family;
+    }
+
+    public void increaseFantasy(int fantasy) {
+        Fantasy += fantasy;
+    }
+
+    public void increaseHistory(int history) {
+        History += history;
+    }
+
+    public void increaseHorror(int horror) {
+        Horror += horror;
+    }
+
+    public void increaseMusic(int music) {
+        Music += music;
+    }
+
+    public void increaseMystery(int mystery) {
+        Mystery += mystery;
+    }
+
+    public void increaseRomance(int romance) {
+        Romance += romance;
+    }
+
+    public void increaseScienceFiction(int scienceFiction) {
+        ScienceFiction += scienceFiction;
+    }
+
+    public void increaseTvMovie(int tvMovie) {
+        TvMovie += tvMovie;
+    }
+
+    public void increaseThriller(int thriller) {
+        Thriller += thriller;
+    }
+
+    public void increaseWar(int war) {
+        War += war;
+    }
+
+    public void increaseWestern(int western) {
+        Western += western;
+    }
+
     public long getUserID() {
         return userID;
     }

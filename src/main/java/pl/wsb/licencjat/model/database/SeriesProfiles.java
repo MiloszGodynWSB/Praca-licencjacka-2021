@@ -37,6 +37,108 @@ public class SeriesProfiles {
     private int war;
     private int western;
 
+    public void setUserID(long userID) {
+        this.userID = userID;
+    }
+
+    public void increaseAction(int action) {
+        this.action += action;
+    }
+
+    public void increaseAdventure(int adventure) {
+        this.adventure += adventure;
+    }
+
+    public void increaseAnimation(int animation) {
+        this.animation += animation;
+    }
+
+    public void increaseComedy(int comedy) {
+        this.comedy += comedy;
+    }
+
+    public void increaseCrime(int crime) {
+        this.crime += crime;
+    }
+
+    public void increaseDocumentary(int documentary) {
+        this.documentary += documentary;
+    }
+
+    public void increaseDrama(int drama) {
+        this.drama += drama;
+    }
+
+    public void increaseFamily(int family) {
+        this.family += family;
+    }
+
+    public void increaseFantasy(int fantasy) {
+        this.fantasy += fantasy;
+    }
+
+    public void increaseHistory(int history) {
+        this.history += history;
+    }
+
+    public void increaseHorror(int horror) {
+        this.horror += horror;
+    }
+
+    public void increaseKids(int kids) {
+        this.kids += kids;
+    }
+
+    public void increaseMusic(int music) {
+        this.music += music;
+    }
+
+    public void increaseMystery(int mystery) {
+        this.mystery += mystery;
+    }
+
+    public void increaseNews(int news) {
+        this.news += news;
+    }
+
+    public void increaseRomance(int romance) {
+        this.romance += romance;
+    }
+
+    public void increaseScienceFiction(int scienceFiction) {
+        this.scienceFiction += scienceFiction;
+    }
+
+    public void increaseReality(int reality) {
+        this.reality += reality;
+    }
+
+    public void increaseSoap(int soap) {
+        this.soap += soap;
+    }
+
+    public void increaseThriller(int thriller) {
+        this.thriller += thriller;
+    }
+
+    public void increaseTalk(int talk) {
+        this.talk += talk;
+    }
+
+    public void increaseTvMovie(int tvMovie) {
+        this.tvMovie += tvMovie;
+    }
+
+    public void increaseWar(int war) {
+        this.war += war;
+    }
+
+    public void increaseWestern(int western) {
+        this.western += western;
+    }
+
+
+
     public long getUserID() {
         return userID;
     }
