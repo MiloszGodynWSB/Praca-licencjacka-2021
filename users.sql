@@ -12,4 +12,5 @@ create table users
 alter table users
     add primary key (ID);
 
-
+alter table users
+	add enabled tinyint default 1 not null;
