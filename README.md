@@ -6,10 +6,19 @@
 
 [localhost:8080](http://localhost:8080)
 
-### logowanie
+### Dodawanie użytkownika
 
-login: user  
-hasło: user
+Generowanie hasła z użyciem [BCrypt](https://bcrypt-generator.com).
+
+Przykład:  
+login: _user_  
+hasło: _pass_
+
+
+```sql
+INSERT INTO movieselector.users (username, password, enabled) VALUES ('user', '$2a$10$8.UnVuG9HHgffUDAlk8qfOuVGkqRzgVymGe07xd00DMxs.AQubh4a', DEFAULT);
+INSERT INTO movieselector.authorities (username, authority) VALUES ('user', 'ROLE_USER');
+```
 
 ### baza danych
 

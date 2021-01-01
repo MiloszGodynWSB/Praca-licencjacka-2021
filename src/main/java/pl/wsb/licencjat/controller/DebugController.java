@@ -77,4 +77,9 @@ public class DebugController {
         System.out.println(tmdbApiConsumer.getSeries(id).toString());
         return "redirect:/";
     }
+
+    @RequestMapping("/security")
+    String checkIfSecurityWorks() {
+        return "security";
+    }
 }
