@@ -9,7 +9,6 @@ import org.springframework.web.client.RestTemplate;
 import pl.wsb.licencjat.recommendation.*;
 import pl.wsb.licencjat.services.TmdbApiConsumer;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -28,11 +27,7 @@ public class DebugController {
     @GetMapping(value = "/movieGenres/{genre1}/{genre2}")
     String getMovie(@PathVariable("genre1") String genre1, @PathVariable("genre2") String genre2) {
         genreMatcher = new GenreMatcherMovies();
-        List<String> lista = new ArrayList<>();
-        lista.add(genre1);
-        lista.add(genre2);
         genreMatcher.setGenrePreference(1, List.of(genre1, genre2));
-
         Long movie = genreMatcher.getRecommendation();
         System.out.println(movie);
         return "redirect:/";
@@ -41,9 +36,7 @@ public class DebugController {
     @GetMapping(value = "/seriesGenres/{genre1}/{genre2}")
     String getSeries(@PathVariable("genre1") String genre1, @PathVariable("genre2") String genre2) {
         genreMatcher = new GenreMatcherSeries();
-        List<String> lista = new ArrayList<>();
-        lista.add(genre1);
-        lista.add(genre2);
+
         genreMatcher.setGenrePreference(1, List.of(genre1, genre2));
 
         Long movie = genreMatcher.getRecommendation();
