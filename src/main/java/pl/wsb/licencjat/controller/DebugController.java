@@ -65,6 +65,19 @@ public class DebugController {
         return "redirect:/";
     }
 
+    @GetMapping(value = "/similar/movie/{movieID}")
+    String getSimilarMovie(@PathVariable("movieID") long movieID) {
+        MediaMatcher matcher = new MediaMatcheMovies(movieID);
+        System.out.println(matcher.getSimilarMedia());
+        return "redirect:/";
+    }
+
+    @GetMapping(value = "/similar/series/{movieID}")
+    String getSimilarSeries(@PathVariable("movieID") long movieID) {
+        MediaMatcher matcher = new MediaMatcherSeries(movieID);
+        System.out.println(matcher.getSimilarMedia());
+        return "redirect:/";
+    }
 
     @GetMapping(value = "/tmdb/api/movie/{id}")
     String consumeTmdbApiMovie(@PathVariable String id, RestTemplate restTemplate) {

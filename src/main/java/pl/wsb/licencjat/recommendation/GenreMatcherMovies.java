@@ -21,7 +21,6 @@ public class GenreMatcherMovies extends GenreMatcher<Movie> {
         System.out.println(selectMoviesQuery);
         Query query = entityManager.createQuery(selectMoviesQuery);
         media = query.getResultList();
-        SortedMap<Long, Long> a;
     }
 
     protected void getUserData() {
