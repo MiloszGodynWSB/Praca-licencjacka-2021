@@ -1,7 +1,5 @@
 package pl.wsb.licencjat.recommendation;
 
-import pl.wsb.licencjat.model.database.Movie;
-import pl.wsb.licencjat.model.database.MoviesProfiles;
 import pl.wsb.licencjat.model.database.Series;
 import pl.wsb.licencjat.model.database.SeriesProfiles;
 
@@ -22,7 +20,8 @@ public class GenreMatcherSeries extends GenreMatcher<Series> {
                 selectMoviesQuery = selectMoviesQuery + "c." + genre + "=1 and ";
             }
             selectMoviesQuery = selectMoviesQuery.substring(0, selectMoviesQuery.length()-5);
-            selectMoviesQuery = selectMoviesQuery + " and c.id not in (Select d.movieID from IgnoredSeries d where d.id=" + userID + ")";
+            selectMoviesQuery = selectMoviesQuery + " and c.id not in " +
+                    "(Select d.movieID from IgnoredSeries d where d.id=" + userID + ")";
         }
         else {
             selectMoviesQuery = "select c from " + "Series" + " c where c.id not in " +

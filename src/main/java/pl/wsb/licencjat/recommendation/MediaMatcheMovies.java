@@ -8,8 +8,8 @@ import java.util.SortedMap;
 
 public class MediaMatcheMovies extends MediaMatcher<Movie> {
 
-    public MediaMatcheMovies(Long mediaID) {
-        super(mediaID);
+    public MediaMatcheMovies(Long mediaID, int userID) {
+        super(mediaID, userID);
         selectMediaQuery = "select c from " + "Movie" + " c where ";
         getMainMedia();
         mediaMagnitude = calculateMagnitude(mainMedia);
@@ -69,6 +69,8 @@ public class MediaMatcheMovies extends MediaMatcher<Movie> {
 
     protected void getMediaToCompare() {
         String selectMoviesQuery = selectMediaQuery + "not c.id=" + mediaID;
+        selectMoviesQuery = selectMoviesQuery + " and c.id not in " +
+                "(Select d.movieID from IgnoredMovies d where d.id=" + userID + ")";
         System.out.println(selectMoviesQuery);
         Query query = entityManager.createQuery(selectMoviesQuery);
         mediaToCompare = query.getResultList();

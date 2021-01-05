@@ -10,6 +10,7 @@ import java.util.TreeMap;
 public abstract class MediaMatcher<T> {
     protected EntityManagerFactory emFactory;
     protected Long mediaID;
+    protected int userID;
     protected T mainMedia;
     protected Double mediaMagnitude;
     protected List<T> mediaToCompare;
@@ -18,11 +19,12 @@ public abstract class MediaMatcher<T> {
     protected Long foundID;
     EntityManager entityManager;
 
-    public MediaMatcher(Long mediaID) {
+    public MediaMatcher(Long mediaID, int userID) {
         emFactory = Persistence.createEntityManagerFactory("spring-jpa-pu");
         entityManager = emFactory.createEntityManager();
         results = new TreeMap<Long, Double>();
         this.mediaID = mediaID;
+        this.userID = userID;
     }
 
     protected abstract int calculateDotProduct(T media);
