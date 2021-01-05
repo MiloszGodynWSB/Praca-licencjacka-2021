@@ -1,9 +1,12 @@
+-- auto-generated definition
 create table ignoredseries
 (
-	userID int not null,
-	movieID int not null,
-    index uID (userID),
-                                   foreign key (userID)
-                                        references users(ID)
-                                        on delete cascade
+    ID int auto_increment,
+    userID  int not null,
+    movieID int not null,
+    index uID (ID)
 );
+
+alter table ignoredseries
+    add primary key (ID);
+
