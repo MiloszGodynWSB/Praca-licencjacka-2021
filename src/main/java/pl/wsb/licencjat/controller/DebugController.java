@@ -31,6 +31,20 @@ public class DebugController {
         this.tmdbApiConsumer = tmdbApiConsumer;
     }
 
+    @GetMapping(value = "/randomMovie/{userId}")
+    String getRandomMovie(@PathVariable("userId") int userId) {
+        RandomMedia media = new RandomMovie(userId);
+        System.out.println(media.getRandomMedia());
+        return "redirect:/";
+    }
+
+    @GetMapping(value = "/randomSeries/{userId}")
+    String getRandomSeries(@PathVariable("userId") int userId) {
+        RandomMedia media = new RandomSeries(userId);
+        System.out.println(media.getRandomMedia());
+        return "redirect:/";
+    }
+
     @GetMapping(value = "/movieGenres/{genre1}/{genre2}")
     String getMovie(@PathVariable("genre1") String genre1, @PathVariable("genre2") String genre2) {
         genreMatcher = new GenreMatcherMovies();
@@ -43,9 +57,7 @@ public class DebugController {
     @GetMapping(value = "/seriesGenres/{genre1}/{genre2}")
     String getSeries(@PathVariable("genre1") String genre1, @PathVariable("genre2") String genre2) {
         genreMatcher = new GenreMatcherSeries();
-
         genreMatcher.setGenrePreference(1, List.of(genre1, genre2));
-
         Long movie = genreMatcher.getRecommendation();
         System.out.println(movie);
         return "redirect:/";
