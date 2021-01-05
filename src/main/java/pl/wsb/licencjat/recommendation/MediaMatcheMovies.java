@@ -8,12 +8,9 @@ import java.util.SortedMap;
 
 public class MediaMatcheMovies extends MediaMatcher<Movie> {
 
-    public MediaMatcheMovies(Long mediaID, int userID) {
-        super(mediaID, userID);
+    public MediaMatcheMovies(int userID) {
+        super(userID);
         selectMediaQuery = "select c from " + "Movie" + " c where ";
-        getMainMedia();
-        mediaMagnitude = calculateMagnitude(mainMedia);
-        getMediaToCompare();
     }
 
     protected int calculateDotProduct(Movie media) {
@@ -60,11 +57,13 @@ public class MediaMatcheMovies extends MediaMatcher<Movie> {
                 Math.pow(media.getWestern(), 2));
     }
 
-    protected void getMainMedia() {
+    public void setMainMedia(Long mediaID) {
+        this.mediaID = mediaID;
         String selectMoviesQuery = selectMediaQuery + "c.id=" + mediaID;
         System.out.println(selectMoviesQuery);
         Query query = entityManager.createQuery(selectMoviesQuery);
         mainMedia = (Movie) query.getResultList().get(0);
+        mediaMagnitude = calculateMagnitude(mainMedia);
     }
 
     protected void getMediaToCompare() {

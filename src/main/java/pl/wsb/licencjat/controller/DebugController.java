@@ -103,14 +103,16 @@ public class DebugController {
 
     @GetMapping(value = "/similar/movie/{movieID}")
     String getSimilarMovie(@PathVariable("movieID") long movieID) {
-        MediaMatcher matcher = new MediaMatcheMovies(movieID,1);
+        MediaMatcher matcher = new MediaMatcheMovies(1);
+        matcher.setMainMedia(movieID);
         System.out.println(matcher.getSimilarMedia());
         return "redirect:/";
     }
 
     @GetMapping(value = "/similar/series/{movieID}")
     String getSimilarSeries(@PathVariable("movieID") long movieID) {
-        MediaMatcher matcher = new MediaMatcherSeries(movieID,1);
+        MediaMatcher matcher = new MediaMatcherSeries(1);
+        matcher.setMainMedia(movieID);
         System.out.println(matcher.getSimilarMedia());
         return "redirect:/";
     }

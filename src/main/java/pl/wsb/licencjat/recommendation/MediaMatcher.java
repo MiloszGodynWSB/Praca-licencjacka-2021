@@ -19,11 +19,10 @@ public abstract class MediaMatcher<T> {
     protected Long foundID;
     EntityManager entityManager;
 
-    public MediaMatcher(Long mediaID, int userID) {
+    public MediaMatcher(int userID) {
         emFactory = Persistence.createEntityManagerFactory("spring-jpa-pu");
         entityManager = emFactory.createEntityManager();
         results = new TreeMap<Long, Double>();
-        this.mediaID = mediaID;
         this.userID = userID;
     }
 
@@ -32,11 +31,12 @@ public abstract class MediaMatcher<T> {
     protected Double calculateSimilarity(T media) {
         return calculateDotProduct(media) / (mediaMagnitude * calculateMagnitude(media));
     }
-    protected abstract void getMainMedia();
+    public abstract void setMainMedia(Long mediaID);
     protected abstract void getMediaToCompare();
     protected abstract void findSimilarMedia();
 
     public Long getSimilarMedia(){
+        getMediaToCompare();
         findSimilarMedia();
         return foundID;
     }
