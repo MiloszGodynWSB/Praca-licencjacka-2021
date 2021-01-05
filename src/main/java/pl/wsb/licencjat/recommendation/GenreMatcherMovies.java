@@ -21,11 +21,11 @@ public class GenreMatcherMovies extends GenreMatcher<Movie> {
             }
             selectMoviesQuery = selectMoviesQuery.substring(0, selectMoviesQuery.length() - 5);
             selectMoviesQuery = selectMoviesQuery + " and c.id not in " +
-                    "(Select d.movieID from IgnoredMovies d where d.id=" + userID + ")";
+                    "(Select d.movieID from IgnoredMovies d where d.userID=" + userID + ")";
         }
         else {
             selectMoviesQuery = "select c from " + "Movie" + " c where c.id not in " +
-                    "(Select d.movieID from IgnoredMovies d where d.id=" + userID + ")";
+                    "(Select d.movieID from IgnoredMovies d where d.userID=" + userID + ")";
         }
 
         System.out.println(selectMoviesQuery);

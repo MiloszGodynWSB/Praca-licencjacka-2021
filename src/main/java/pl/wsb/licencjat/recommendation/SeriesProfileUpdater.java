@@ -1,5 +1,7 @@
 package pl.wsb.licencjat.recommendation;
 
+import org.springframework.data.repository.CrudRepository;
+import pl.wsb.licencjat.model.database.IgnoredSeries;
 import pl.wsb.licencjat.model.database.Series;
 import pl.wsb.licencjat.model.database.SeriesProfiles;
 
@@ -8,8 +10,8 @@ import javax.persistence.Query;
 
 public class SeriesProfileUpdater extends ProfileUpdater<Series, SeriesProfiles> {
 
-    public SeriesProfileUpdater(long userID) {
-        super(userID);
+    public SeriesProfileUpdater(long userID, CrudRepository repository) {
+        super(userID, repository);
         String userQuery = "select c from SeriesProfiles c where c.userID=" + userID;
         Query query = entityManager.createQuery(userQuery);
         userData = (SeriesProfiles) query.getResultList().get(0);
@@ -54,6 +56,13 @@ public class SeriesProfileUpdater extends ProfileUpdater<Series, SeriesProfiles>
         tx.begin();
         entityManager.merge(userData);
         tx.commit();
+
     }
 
+    public void AddToIgnoreList(long mediaID) {
+        IgnoredSeries ignoredSeries = new IgnoredSeries();
+        ignoredSeries.setMovieID(mediaID);
+        ignoredSeries.setuserID((int) userID);
+        repository.save(ignoredSeries);
+    }
 }

@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.client.RestTemplate;
 import pl.wsb.licencjat.recommendation.*;
+import pl.wsb.licencjat.repository.IgnoredMoviesRepository;
+import pl.wsb.licencjat.repository.IgnoredSeriesRepository;
 import pl.wsb.licencjat.services.TmdbApiConsumer;
 
 import java.util.List;
@@ -18,9 +20,14 @@ public class DebugController {
     private GenreMatcher genreMatcher;
     private TmdbApiConsumer tmdbApiConsumer;
     private ProfileUpdater profileUpdater;
+    private IgnoredSeriesRepository ignoredSeriesRepository;
+    private IgnoredMoviesRepository ignoredMoviesRepository;
 
     @Autowired
-    public DebugController(TmdbApiConsumer tmdbApiConsumer) {
+    public DebugController(TmdbApiConsumer tmdbApiConsumer, IgnoredSeriesRepository ignoredSeriesRepository,
+                           IgnoredMoviesRepository ignoredMoviesRepository) {
+        this.ignoredSeriesRepository = ignoredSeriesRepository;
+        this.ignoredMoviesRepository = ignoredMoviesRepository;
         this.tmdbApiConsumer = tmdbApiConsumer;
     }
 
@@ -55,15 +62,30 @@ public class DebugController {
 
     @GetMapping(value = "/score/movie/{userID}/{movieID}/{liked}")
     String updateMovieProfile(@PathVariable("userID") long userID, @PathVariable("movieID") long movieID, @PathVariable("liked") int liked) {
-        profileUpdater = new MovieProfileUpdater(userID);
+        profileUpdater = new MovieProfileUpdater(userID, ignoredMoviesRepository);
         profileUpdater.ModifyProfile(movieID, liked);
+        profileUpdater.AddToIgnoreList(movieID);
+        return "redirect:/";
+    }
+
+    @GetMapping(value = "/score/movie/{userID}/{movieID}")
+    String updateMovieProfile(@PathVariable("userID") long userID, @PathVariable("movieID") long movieID) {
+        profileUpdater = new MovieProfileUpdater(userID, ignoredMoviesRepository);
+        profileUpdater.AddToIgnoreList(movieID);
         return "redirect:/";
     }
 
     @GetMapping(value = "/score/series/{userID}/{movieID}/{liked}")
     String updateSeriesProfile(@PathVariable("userID") long userID, @PathVariable("movieID") long movieID, @PathVariable("liked") int liked) {
-        profileUpdater = new SeriesProfileUpdater(userID);
+        profileUpdater = new SeriesProfileUpdater(userID, ignoredSeriesRepository);
         profileUpdater.ModifyProfile(movieID, liked);
+        profileUpdater.AddToIgnoreList(movieID);
+        return "redirect:/";
+    }
+    @GetMapping(value = "/score/series/{userID}/{movieID}")
+    String updateSeriesProfile(@PathVariable("userID") long userID, @PathVariable("movieID") long movieID) {
+        profileUpdater = new SeriesProfileUpdater(userID, ignoredSeriesRepository);
+        profileUpdater.AddToIgnoreList(movieID);
         return "redirect:/";
     }
 

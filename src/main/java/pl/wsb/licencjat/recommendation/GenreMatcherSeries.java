@@ -21,11 +21,11 @@ public class GenreMatcherSeries extends GenreMatcher<Series> {
             }
             selectMoviesQuery = selectMoviesQuery.substring(0, selectMoviesQuery.length()-5);
             selectMoviesQuery = selectMoviesQuery + " and c.id not in " +
-                    "(Select d.movieID from IgnoredSeries d where d.id=" + userID + ")";
+                    "(Select d.movieID from IgnoredSeries d where d.userID=" + userID + ")";
         }
         else {
             selectMoviesQuery = "select c from " + "Series" + " c where c.id not in " +
-                    "(Select d.movieID from IgnoredSeries d where d.id=" + userID + ")";
+                    "(Select d.movieID from IgnoredSeries d where d.userID=" + userID + ")";
         }
 
         System.out.println(selectMoviesQuery);
@@ -34,7 +34,7 @@ public class GenreMatcherSeries extends GenreMatcher<Series> {
     }
 
     protected void getUserData() {
-        String userQuery = "select c from" + "SeriesProfiles" + "c where c.userID=" + userID;
+        String userQuery = "select c from " + "SeriesProfiles" + " c where c.userID=" + userID;
         Query query = entityManager.createQuery(userQuery);
         List<SeriesProfiles> data = query.getResultList();
         userData = data.get(0);

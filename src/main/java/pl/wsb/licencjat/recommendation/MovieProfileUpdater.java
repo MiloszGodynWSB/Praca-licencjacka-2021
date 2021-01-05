@@ -1,5 +1,7 @@
 package pl.wsb.licencjat.recommendation;
 
+import org.springframework.data.repository.CrudRepository;
+import pl.wsb.licencjat.model.database.IgnoredMovies;
 import pl.wsb.licencjat.model.database.Movie;
 import pl.wsb.licencjat.model.database.MoviesProfiles;
 
@@ -8,8 +10,8 @@ import javax.persistence.Query;
 
 public class MovieProfileUpdater extends ProfileUpdater<Movie, MoviesProfiles> {
 
-    public MovieProfileUpdater(long userID) {
-        super(userID);
+    public MovieProfileUpdater(long userID, CrudRepository repository) {
+        super(userID, repository);
         String userQuery = "select c from MoviesProfiles c where c.userID=" + userID;
         Query query = entityManager.createQuery(userQuery);
         userData = (MoviesProfiles) query.getResultList().get(0);
@@ -47,8 +49,15 @@ public class MovieProfileUpdater extends ProfileUpdater<Movie, MoviesProfiles> {
 
         EntityTransaction tx = entityManager.getTransaction();
         tx.begin();
-        entityManager.merge(userData);
+        entityManager.persist(userData);
         tx.commit();
+    }
+
+    public void AddToIgnoreList(long mediaID) {
+        IgnoredMovies ignoredMovies = new IgnoredMovies();
+        ignoredMovies.setMovieID(mediaID);
+        ignoredMovies.setuserID((int) userID);
+        repository.save(ignoredMovies);
     }
 
 }
