@@ -21,9 +21,9 @@ create table moviesProfiles
     War            int default 0 not null,
     Western        int default 0 not null,
     index uID (userID),
-                                   foreign key (userID)
-                                        references users(ID)
-                                        on delete cascade
+    foreign key (userID)
+    references users(ID)
+    on delete cascade
 );
 
 
