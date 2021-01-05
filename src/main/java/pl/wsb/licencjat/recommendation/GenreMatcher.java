@@ -1,5 +1,6 @@
 package pl.wsb.licencjat.recommendation;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.SortedMap;
 import java.util.TreeMap;
@@ -28,6 +29,11 @@ public abstract class GenreMatcher<T> {
     public void setGenrePreference(long user, List<String> genres) {
         this.userID = user;
         this.genres = genres;
+    }
+
+    public void setGenrePreference(long user) {
+        this.userID = user;
+        this.genres = new ArrayList<>();
     }
 
     protected abstract void getMovies();

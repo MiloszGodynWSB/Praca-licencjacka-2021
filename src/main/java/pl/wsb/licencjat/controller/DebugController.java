@@ -44,6 +44,15 @@ public class DebugController {
         return "redirect:/";
     }
 
+    @GetMapping(value = "/movieNoGenres/{userID}")
+    String getMovie(@PathVariable("userID") int user) {
+        genreMatcher = new GenreMatcherMovies();
+        genreMatcher.setGenrePreference(user);
+        Long movie = genreMatcher.getRecommendation();
+        System.out.println(movie);
+        return "redirect:/";
+    }
+
     @GetMapping(value = "/score/movie/{userID}/{movieID}/{liked}")
     String updateMovieProfile(@PathVariable("userID") long userID, @PathVariable("movieID") long movieID, @PathVariable("liked") int liked) {
         profileUpdater = new MovieProfileUpdater(userID);
