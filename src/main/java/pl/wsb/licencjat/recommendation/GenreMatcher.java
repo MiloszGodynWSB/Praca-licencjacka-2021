@@ -26,11 +26,20 @@ public abstract class GenreMatcher<T> {
         results = new TreeMap<Long, Integer>();
     }
 
+    /**
+     * For searches with  Genre filtering
+     * @param user user that the search needs to be done for
+     * @param genres genres for filtering
+     */
     public void setGenrePreference(long user, List<String> genres) {
         this.userID = user;
         this.genres = genres;
     }
 
+    /**
+     * For searches with no Genre filtering
+     * @param user user that the search needs to be done for
+     */
     public void setGenrePreference(long user) {
         this.userID = user;
         this.genres = new ArrayList<>();
@@ -41,7 +50,10 @@ public abstract class GenreMatcher<T> {
     protected abstract void getUserData();
     protected abstract void matchMovies();
 
-
+    /**
+     * Searches for media recommendation
+     * @return found recommended media ID
+     */
     public Long getRecommendation() {
         getMovies();
         getUserData();

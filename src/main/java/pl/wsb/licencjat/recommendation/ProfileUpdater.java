@@ -15,6 +15,11 @@ public abstract class ProfileUpdater<T, U> {
     protected EntityManager entityManager;
     protected CrudRepository repository;
 
+    /**
+     * Constructs ProfileUpdater object for specified user
+     * @param userID
+     * @param repository
+     */
     public ProfileUpdater(long userID, CrudRepository repository) {
         this.userID = userID;
         this.repository = repository;
@@ -22,6 +27,24 @@ public abstract class ProfileUpdater<T, U> {
         entityManager = emFactory.createEntityManager();
     }
 
+    /**
+     * Modifies user profile based on the media watched and score given
+     * @param mediaID
+     * @param score -2 watched and didn't like
+     *              -1 didn't watch and dont want to
+     *              0 not interested
+     *              1 didn't watch but want to
+     *              2 watched and liked
+     *              OR
+     *              1 liked
+     *              0 Ignore
+     *              -1 didn't like
+     */
     public abstract void ModifyProfile(long mediaID, int score);
+
+    /**
+     * Adds media to ignore list
+     * @param mediaID
+     */
     public abstract void AddToIgnoreList(long mediaID);
 }

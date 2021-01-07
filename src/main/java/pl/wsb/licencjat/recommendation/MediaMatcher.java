@@ -19,6 +19,10 @@ public abstract class MediaMatcher<T> {
     protected Long foundID;
     EntityManager entityManager;
 
+    /**
+     * Constructs MediaMatcher object for specified user
+     * @param userID user that media matching will be done for. Needed for ignore list
+     */
     public MediaMatcher(int userID) {
         emFactory = Persistence.createEntityManagerFactory("spring-jpa-pu");
         entityManager = emFactory.createEntityManager();
@@ -31,10 +35,19 @@ public abstract class MediaMatcher<T> {
     protected Double calculateSimilarity(T media) {
         return calculateDotProduct(media) / (mediaMagnitude * calculateMagnitude(media));
     }
+
+    /**
+     * Sets Media that other media will be compared to
+     * @param mediaID
+     */
     public abstract void setMainMedia(Long mediaID);
     protected abstract void getMediaToCompare();
     protected abstract void findSimilarMedia();
 
+    /**
+     * Finds the most similar media to the main one based on user ignore list
+     * @return id of found media
+     */
     public Long getSimilarMedia(){
         getMediaToCompare();
         findSimilarMedia();

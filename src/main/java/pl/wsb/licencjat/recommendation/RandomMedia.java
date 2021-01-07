@@ -13,6 +13,10 @@ public abstract class RandomMedia<T> {
     protected Long foundID;
     EntityManager entityManager;
 
+    /**
+     * Constructs random media finder for a given user
+     * @param userID
+     */
     public RandomMedia(int userID) {
         emFactory = Persistence.createEntityManagerFactory("spring-jpa-pu");
         entityManager = emFactory.createEntityManager();
@@ -20,6 +24,11 @@ public abstract class RandomMedia<T> {
     }
 
     protected abstract void getMedia();
+
+    /**
+     * Returns random media
+     * @return found mediaID
+     */
     public abstract Long getRandomMedia();
 
 }

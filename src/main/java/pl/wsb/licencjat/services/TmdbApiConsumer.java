@@ -75,6 +75,12 @@ public class TmdbApiConsumer {
         return API_URL_SEARCH_SERIES  + String.format(API_OPTIONS, API_KEY) + "&query=" + query;
     }
 
+    /** Searches for movieIDs
+     *
+     *
+     * @param query title name to search for
+     * @return ArrayList with found ids
+     */
     @SneakyThrows
     public ArrayList<Long> SearchMovie(String query) {
         String builtQuery = buildUrlSearchMovie(query);
@@ -95,6 +101,12 @@ public class TmdbApiConsumer {
         return movieIDs;
     }
 
+    /** Searches for seriesIDs
+     *
+     *
+     * @param query title name to search for
+     * @return ArrayList with found ids
+     */
     @SneakyThrows
     public ArrayList<Long> SearchSeries(String query) {
         String builtQuery = buildUrlSearchSeries(query);
