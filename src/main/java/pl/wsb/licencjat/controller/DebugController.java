@@ -129,6 +129,18 @@ public class DebugController {
         return "redirect:/";
     }
 
+    @GetMapping(value = "/movie/jsontest")
+    String consumeTmdbApiSearchMovie(RestTemplate restTemplate) {
+        var id = tmdbApiConsumer.SearchMovie("It");
+        return "redirect:/";
+    }
+
+    @GetMapping(value = "/series/jsontest")
+    String consumeTmdbApiSearchSeries(RestTemplate restTemplate) {
+        var id = tmdbApiConsumer.SearchSeries("altered carbon");
+        return "redirect:/";
+    }
+
     @RequestMapping("/security")
     String checkIfSecurityWorks() {
         return "security";
