@@ -7,7 +7,7 @@ import pl.wsb.licencjat.model.database.Series;
 import java.util.Optional;
 
 @Repository
-public interface SeriesRepository extends JpaRepository<Series, Long>{
+public interface SeriesRepository extends JpaRepository<Series, Long> {
 
     Optional<Series> findById(long id);
 

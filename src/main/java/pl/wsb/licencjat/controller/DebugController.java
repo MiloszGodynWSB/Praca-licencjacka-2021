@@ -75,35 +75,36 @@ public class DebugController {
     @GetMapping(value = "/score/movie/{userID}/{movieID}/{liked}")
     String updateMovieProfile(@PathVariable("userID") long userID, @PathVariable("movieID") long movieID, @PathVariable("liked") int liked) {
         profileUpdater = new MovieProfileUpdater(userID, ignoredMoviesRepository);
-        profileUpdater.ModifyProfile(movieID, liked);
-        profileUpdater.AddToIgnoreList(movieID);
+        profileUpdater.modifyProfile(movieID, liked);
+        profileUpdater.addToIgnoreList(movieID);
         return "redirect:/";
     }
 
     @GetMapping(value = "/score/movie/{userID}/{movieID}")
     String updateMovieProfile(@PathVariable("userID") long userID, @PathVariable("movieID") long movieID) {
         profileUpdater = new MovieProfileUpdater(userID, ignoredMoviesRepository);
-        profileUpdater.AddToIgnoreList(movieID);
+        profileUpdater.addToIgnoreList(movieID);
         return "redirect:/";
     }
 
     @GetMapping(value = "/score/series/{userID}/{movieID}/{liked}")
     String updateSeriesProfile(@PathVariable("userID") long userID, @PathVariable("movieID") long movieID, @PathVariable("liked") int liked) {
         profileUpdater = new SeriesProfileUpdater(userID, ignoredSeriesRepository);
-        profileUpdater.ModifyProfile(movieID, liked);
-        profileUpdater.AddToIgnoreList(movieID);
+        profileUpdater.modifyProfile(movieID, liked);
+        profileUpdater.addToIgnoreList(movieID);
         return "redirect:/";
     }
+
     @GetMapping(value = "/score/series/{userID}/{movieID}")
     String updateSeriesProfile(@PathVariable("userID") long userID, @PathVariable("movieID") long movieID) {
         profileUpdater = new SeriesProfileUpdater(userID, ignoredSeriesRepository);
-        profileUpdater.AddToIgnoreList(movieID);
+        profileUpdater.addToIgnoreList(movieID);
         return "redirect:/";
     }
 
     @GetMapping(value = "/similar/movie/{movieID}")
     String getSimilarMovie(@PathVariable("movieID") long movieID) {
-        MediaMatcher matcher = new MediaMatcheMovies(1);
+        MediaMatcher matcher = new MediaMatcherMovies(1);
         matcher.setMainMedia(movieID);
         System.out.println(matcher.getSimilarMedia());
         return "redirect:/";
@@ -131,13 +132,13 @@ public class DebugController {
 
     @GetMapping(value = "/movie/jsontest")
     String consumeTmdbApiSearchMovie(RestTemplate restTemplate) {
-        var id = tmdbApiConsumer.SearchMovie("It");
+        var id = tmdbApiConsumer.searchMovie("It");
         return "redirect:/";
     }
 
     @GetMapping(value = "/series/jsontest")
     String consumeTmdbApiSearchSeries(RestTemplate restTemplate) {
-        var id = tmdbApiConsumer.SearchSeries("altered carbon");
+        var id = tmdbApiConsumer.searchSeries("altered carbon");
         return "redirect:/";
     }
 

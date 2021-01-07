@@ -1,26 +1,17 @@
 package pl.wsb.licencjat.services;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.util.JSONPObject;
 import lombok.SneakyThrows;
 import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import pl.wsb.licencjat.model.tmdb.TmdbMovie;
 import pl.wsb.licencjat.model.tmdb.TmdbSeries;
 
 import java.util.ArrayList;
-import java.util.List;
 
 @Service
 public class TmdbApiConsumer {
@@ -35,7 +26,7 @@ public class TmdbApiConsumer {
     private String API_URL_SEARCH_MOVIE;
     @Value("${spring.tmdb.api.search-series}")
     private String API_URL_SEARCH_SERIES;
-    private String API_OPTIONS = "?api_key=%s&language=en-US";
+    private String API_OPTIONS = "?api_key=%s&language=pl-PL";
     private RestTemplate restTemplate;
 
     @Autowired
@@ -68,21 +59,21 @@ public class TmdbApiConsumer {
     }
 
     private String buildUrlSearchMovie(String query) {
-        return API_URL_SEARCH_MOVIE  + String.format(API_OPTIONS, API_KEY) + "&query=" + query;
+        return API_URL_SEARCH_MOVIE + String.format(API_OPTIONS, API_KEY) + "&query=" + query;
     }
 
     private String buildUrlSearchSeries(String query) {
-        return API_URL_SEARCH_SERIES  + String.format(API_OPTIONS, API_KEY) + "&query=" + query;
+        return API_URL_SEARCH_SERIES + String.format(API_OPTIONS, API_KEY) + "&query=" + query;
     }
 
-    /** Searches for movieIDs
-     *
+    /**
+     * Searches for movieIDs
      *
      * @param query title name to search for
      * @return ArrayList with found ids
      */
     @SneakyThrows
-    public ArrayList<Long> SearchMovie(String query) {
+    public ArrayList<Long> searchMovie(String query) {
         String builtQuery = buildUrlSearchMovie(query);
         var moviesResponse = restTemplate.exchange(
                 builtQuery,
@@ -91,24 +82,24 @@ public class TmdbApiConsumer {
         String JsonString = moviesResponse.getBody();
 
         JSONObject jsnobj = new JSONObject(JsonString);
-        JSONArray jsonArray =  jsnobj.getJSONArray("results");
+        JSONArray jsonArray = jsnobj.getJSONArray("results");
         ArrayList<Long> movieIDs = new ArrayList<>();
 
-        for(int i = 0; i <jsonArray.length(); i++) {
+        for (int i = 0; i < jsonArray.length(); i++) {
             movieIDs.add(jsonArray.getJSONObject(i).getLong("id"));
         }
 
         return movieIDs;
     }
 
-    /** Searches for seriesIDs
-     *
+    /**
+     * Searches for seriesIDs
      *
      * @param query title name to search for
      * @return ArrayList with found ids
      */
     @SneakyThrows
-    public ArrayList<Long> SearchSeries(String query) {
+    public ArrayList<Long> searchSeries(String query) {
         String builtQuery = buildUrlSearchSeries(query);
         var seriesResponse = restTemplate.exchange(
                 builtQuery,
@@ -117,10 +108,10 @@ public class TmdbApiConsumer {
         String JsonString = seriesResponse.getBody();
 
         JSONObject jsnobj = new JSONObject(JsonString);
-        JSONArray jsonArray =  jsnobj.getJSONArray("results");
+        JSONArray jsonArray = jsnobj.getJSONArray("results");
         ArrayList<Long> seriesIDs = new ArrayList<>();
 
-        for(int i = 0; i <jsonArray.length(); i++) {
+        for (int i = 0; i < jsonArray.length(); i++) {
             seriesIDs.add(jsonArray.getJSONObject(i).getLong("id"));
         }
 

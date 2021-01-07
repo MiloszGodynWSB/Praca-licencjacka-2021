@@ -5,7 +5,7 @@ import pl.wsb.licencjat.model.database.Movie;
 import javax.persistence.Query;
 import java.util.Random;
 
-public class RandomMovie extends  RandomMedia<Movie> {
+public class RandomMovie extends RandomMedia<Movie> {
 
     public RandomMovie(int userID) {
         super(userID);

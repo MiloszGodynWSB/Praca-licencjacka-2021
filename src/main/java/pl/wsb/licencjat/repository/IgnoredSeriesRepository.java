@@ -6,5 +6,4 @@ import pl.wsb.licencjat.model.database.IgnoredSeries;
 
 @Repository
 public interface IgnoredSeriesRepository extends CrudRepository<IgnoredSeries, Integer> {
-
 }

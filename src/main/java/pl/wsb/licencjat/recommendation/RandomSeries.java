@@ -1,6 +1,7 @@
 package pl.wsb.licencjat.recommendation;
 
 import pl.wsb.licencjat.model.database.Series;
+
 import javax.persistence.Query;
 import java.util.Random;
 

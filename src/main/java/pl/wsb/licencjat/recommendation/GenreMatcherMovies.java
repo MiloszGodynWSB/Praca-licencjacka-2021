@@ -14,16 +14,15 @@ public class GenreMatcherMovies extends GenreMatcher<Movie> {
 
     protected void getMovies() {
 
-        if(genres.size() > 0) {
+        if (genres.size() > 0) {
             selectMoviesQuery = "select c from " + "Movie" + " c where ";
             for (String genre : genres) {
                 selectMoviesQuery = selectMoviesQuery + "c." + genre + "=1 and ";
             }
             selectMoviesQuery = selectMoviesQuery.substring(0, selectMoviesQuery.length() - 5);
             selectMoviesQuery = selectMoviesQuery + " and c.id not in " +
-                    "(Select d.movieID from IgnoredMovies d where d.userID=" + userID + ")";
-        }
-        else {
+                    "(Select d.movieID from IgnoredMovies d wheóre d.userID=" + userID + ")";
+        } else {
             selectMoviesQuery = "select c from " + "Movie" + " c where c.id not in " +
                     "(Select d.movieID from IgnoredMovies d where d.userID=" + userID + ")";
         }
@@ -64,11 +63,11 @@ public class GenreMatcherMovies extends GenreMatcher<Movie> {
     }
 
     protected void matchMovies() {
-        for(Movie movie : media) {
+        for (Movie movie : media) {
             results.put(
                     movie.getId(),
                     calculateDotProduct(movie)
-                    );
+            );
         }
 
         foundID = Collections.max(results.entrySet(), SortedMap.Entry.comparingByValue()).getKey();

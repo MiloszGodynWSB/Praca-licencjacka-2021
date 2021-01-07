@@ -86,10 +86,10 @@ public class MediaMatcherSeries extends MediaMatcher<Series> {
     }
 
     protected void findSimilarMedia() {
-        for (Series serie : mediaToCompare) {
+        for (Series series : mediaToCompare) {
             results.put(
-                    serie.getId(),
-                    calculateSimilarity(serie)
+                    series.getId(),
+                    calculateSimilarity(series)
             );
         }
         foundID = Collections.max(results.entrySet(), SortedMap.Entry.comparingByValue()).getKey();

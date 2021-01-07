@@ -1,13 +1,12 @@
 package pl.wsb.licencjat.recommendation;
 
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.SortedMap;
 import java.util.TreeMap;
-
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 
 public abstract class GenreMatcher<T> {
     protected long userID;
@@ -28,7 +27,8 @@ public abstract class GenreMatcher<T> {
 
     /**
      * For searches with  Genre filtering
-     * @param user user that the search needs to be done for
+     *
+     * @param user   user that the search needs to be done for
      * @param genres genres for filtering
      */
     public void setGenrePreference(long user, List<String> genres) {
@@ -38,6 +38,7 @@ public abstract class GenreMatcher<T> {
 
     /**
      * For searches with no Genre filtering
+     *
      * @param user user that the search needs to be done for
      */
     public void setGenrePreference(long user) {
@@ -46,12 +47,16 @@ public abstract class GenreMatcher<T> {
     }
 
     protected abstract void getMovies();
+
     protected abstract int calculateDotProduct(T movie);
+
     protected abstract void getUserData();
+
     protected abstract void matchMovies();
 
     /**
      * Searches for media recommendation
+     *
      * @return found recommended media ID
      */
     public Long getRecommendation() {

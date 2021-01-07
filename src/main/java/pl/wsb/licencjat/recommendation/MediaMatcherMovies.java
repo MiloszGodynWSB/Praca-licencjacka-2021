@@ -6,9 +6,9 @@ import javax.persistence.Query;
 import java.util.Collections;
 import java.util.SortedMap;
 
-public class MediaMatcheMovies extends MediaMatcher<Movie> {
+public class MediaMatcherMovies extends MediaMatcher<Movie> {
 
-    public MediaMatcheMovies(int userID) {
+    public MediaMatcherMovies(int userID) {
         super(userID);
         selectMediaQuery = "select c from " + "Movie" + " c where ";
     }
@@ -36,7 +36,7 @@ public class MediaMatcheMovies extends MediaMatcher<Movie> {
     }
 
     protected Double calculateMagnitude(Movie media) {
-        return Math.sqrt( Math.pow(media.getAction(), 2) +
+        return Math.sqrt(Math.pow(media.getAction(), 2) +
                 Math.pow(media.getAdventure(), 2) +
                 Math.pow(media.getAnimation(), 2) +
                 Math.pow(media.getDrama(), 2) +

@@ -14,16 +14,15 @@ public class GenreMatcherSeries extends GenreMatcher<Series> {
 
     protected void getMovies() {
 
-        if(genres.size() > 0) {
+        if (genres.size() > 0) {
             selectMoviesQuery = "select c from " + "Series" + " c where ";
             for (String genre : genres) {
                 selectMoviesQuery = selectMoviesQuery + "c." + genre + "=1 and ";
             }
-            selectMoviesQuery = selectMoviesQuery.substring(0, selectMoviesQuery.length()-5);
+            selectMoviesQuery = selectMoviesQuery.substring(0, selectMoviesQuery.length() - 5);
             selectMoviesQuery = selectMoviesQuery + " and c.id not in " +
                     "(Select d.movieID from IgnoredSeries d where d.userID=" + userID + ")";
-        }
-        else {
+        } else {
             selectMoviesQuery = "select c from " + "Series" + " c where c.id not in " +
                     "(Select d.movieID from IgnoredSeries d where d.userID=" + userID + ")";
         }
@@ -68,7 +67,7 @@ public class GenreMatcherSeries extends GenreMatcher<Series> {
     }
 
     protected void matchMovies() {
-        for(Series movie : media) {
+        for (Series movie : media) {
             results.put(
                     movie.getId(),
                     calculateDotProduct(movie)

@@ -17,7 +17,7 @@ public class MovieProfileUpdater extends ProfileUpdater<Movie, MoviesProfiles> {
         userData = (MoviesProfiles) query.getResultList().get(0);
     }
 
-    public void ModifyProfile(long mediaID, int score) {
+    public void modifyProfile(long mediaID, int score) {
         if(score == 0) {
             return;
         }
@@ -53,10 +53,10 @@ public class MovieProfileUpdater extends ProfileUpdater<Movie, MoviesProfiles> {
         tx.commit();
     }
 
-    public void AddToIgnoreList(long mediaID) {
+    public void addToIgnoreList(long mediaID) {
         IgnoredMovies ignoredMovies = new IgnoredMovies();
         ignoredMovies.setMovieID(mediaID);
-        ignoredMovies.setuserID((int) userID);
+        ignoredMovies.setUserID((int) userID);
         repository.save(ignoredMovies);
     }
 

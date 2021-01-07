@@ -138,7 +138,6 @@ public class SeriesProfiles {
     }
 
 
-
     public long getUserID() {
         return userID;
     }

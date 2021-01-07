@@ -15,6 +15,7 @@ public abstract class RandomMedia<T> {
 
     /**
      * Constructs random media finder for a given user
+     *
      * @param userID
      */
     public RandomMedia(int userID) {
@@ -27,6 +28,7 @@ public abstract class RandomMedia<T> {
 
     /**
      * Returns random media
+     *
      * @return found mediaID
      */
     public abstract Long getRandomMedia();

@@ -17,7 +17,7 @@ public class IgnoredSeries {
     private long userID;
     private long movieID;
 
-    public void setuserID(long userID) {
+    public void setUserID(long userID) {
         this.userID = userID;
     }
 

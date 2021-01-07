@@ -17,7 +17,7 @@ public class SeriesProfileUpdater extends ProfileUpdater<Series, SeriesProfiles>
         userData = (SeriesProfiles) query.getResultList().get(0);
     }
 
-    public void ModifyProfile(long mediaID, int score) {
+    public void modifyProfile(long mediaID, int score) {
         if(score == 0) {
             return;
         }
@@ -59,10 +59,10 @@ public class SeriesProfileUpdater extends ProfileUpdater<Series, SeriesProfiles>
 
     }
 
-    public void AddToIgnoreList(long mediaID) {
+    public void addToIgnoreList(long mediaID) {
         IgnoredSeries ignoredSeries = new IgnoredSeries();
         ignoredSeries.setMovieID(mediaID);
-        ignoredSeries.setuserID((int) userID);
+        ignoredSeries.setUserID((int) userID);
         repository.save(ignoredSeries);
     }
 }
