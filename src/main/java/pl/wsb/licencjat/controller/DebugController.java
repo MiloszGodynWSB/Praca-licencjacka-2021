@@ -1,17 +1,22 @@
 package pl.wsb.licencjat.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.client.RestTemplate;
+import pl.wsb.licencjat.model.tmdb.TmdbMovie;
+import pl.wsb.licencjat.model.tmdb.TmdbSeries;
 import pl.wsb.licencjat.recommendation.*;
 import pl.wsb.licencjat.repository.IgnoredMoviesRepository;
 import pl.wsb.licencjat.repository.IgnoredSeriesRepository;
 import pl.wsb.licencjat.services.TmdbApiConsumer;
 
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping(value = "/debug")
@@ -22,6 +27,9 @@ public class DebugController {
     private ProfileUpdater profileUpdater;
     private IgnoredSeriesRepository ignoredSeriesRepository;
     private IgnoredMoviesRepository ignoredMoviesRepository;
+    @Value("${spring.preferences.movies.ids}") String MOVIES_IDS;
+    @Value("${spring.preferences.series.ids}") String SERIES_IDS;
+
 
     @Autowired
     public DebugController(TmdbApiConsumer tmdbApiConsumer, IgnoredSeriesRepository ignoredSeriesRepository,
@@ -145,5 +153,22 @@ public class DebugController {
     @RequestMapping("/security")
     String checkIfSecurityWorks() {
         return "security";
+    }
+
+    @RequestMapping("/checkIds")
+    String checkIds() {
+        List<String> moviesList = Arrays.asList(MOVIES_IDS.split(","));
+        List<String> seriesList = Arrays.asList(SERIES_IDS.split(","));
+
+        for (String movieId : moviesList) {
+            TmdbMovie movie = tmdbApiConsumer.getMovie(movieId);
+            System.out.println("Film: " + movie.getTitle());
+        }
+        System.out.println("------------------");
+        for (String seriesId : seriesList) {
+            TmdbSeries series = tmdbApiConsumer.getSeries(seriesId);
+            System.out.println("Serial: " + series.getName());
+        }
+        return "redirect:/";
     }
 }
