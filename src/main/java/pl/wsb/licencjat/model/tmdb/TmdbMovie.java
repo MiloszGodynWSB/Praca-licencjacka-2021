@@ -9,11 +9,16 @@ import lombok.Setter;
 @Setter
 public class TmdbMovie {
 
+    private String id;
     private String title;
     private String tagline;
     private String overview;
     private String original_title;
     private String poster_path;
+
+    public String getId() {
+        return id;
+    }
 
     public String getTitle() {
         return title;

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Ustawienia profilu | CBTO</title>
+</head>
+<body>
+<h1>Filmy</h1>
+<table border="1">
+    <tr>
+        <th>ID</th>
+        <th>Tytuł</th>
+        <th>Opis</th>
+    </tr>
+    <tr th:each="movie: ${movies}">
+        <td th:text="${movie.id}">ID</td>
+        <td th:text="${movie.title}">Title</td>
+        <td th:text="${movie.overview}">Tagline</td>
+    </tr>
+</table>
+<h1>Seriale</h1>
+<table border="1">
+    <tr>
+        <th>ID</th>
+        <th>Tytuł</th>
+        <th>Opis</th>
+    </tr>
+    <tr th:each="serie: ${series}">
+        <td th:text="${serie.id}">ID</td>
+        <td th:text="${serie.name}">Title</td>
+        <td th:text="${serie.overview}">Tagline</td>
+    </tr>
+</table>
+</body>
+</html>
