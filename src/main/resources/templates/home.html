@@ -26,6 +26,7 @@
                 <div class="col col-lg-2">
                     <form action="/movies" method="post">
                         <input type="submit" class="btn btn-outline-dark btn-lg" value="Chcę film!">
+                        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
                     </form>
                 </div>
                 <div class="col-md-auto">

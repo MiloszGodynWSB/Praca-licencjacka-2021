@@ -1,13 +1,17 @@
 package pl.wsb.licencjat.controller;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import pl.wsb.licencjat.model.tmdb.TmdbMovie;
 import pl.wsb.licencjat.model.tmdb.TmdbSeries;
+import pl.wsb.licencjat.recommendation.MovieProfileUpdater;
+import pl.wsb.licencjat.repository.IgnoredMoviesRepository;
+import pl.wsb.licencjat.repository.UserRepository;
 import pl.wsb.licencjat.services.TmdbApiConsumer;
 
 import javax.servlet.http.HttpServletRequest;
@@ -24,9 +28,13 @@ public class PreferencesController {
     @Value("${spring.preferences.series.ids}")
     private String SERIES_IDS;
     private final TmdbApiConsumer tmdbApiConsumer;
+    private IgnoredMoviesRepository ignoredMoviesRepository;
+    private UserRepository userRepository;
 
-    public PreferencesController(TmdbApiConsumer tmdbApiConsumer) {
+    public PreferencesController(IgnoredMoviesRepository ignoredMoviesRepository, TmdbApiConsumer tmdbApiConsumer, UserRepository userRepository) {
+        this.ignoredMoviesRepository = ignoredMoviesRepository;
         this.tmdbApiConsumer = tmdbApiConsumer;
+        this.userRepository = userRepository;
     }
 
     @RequestMapping("/movies")
@@ -37,11 +45,13 @@ public class PreferencesController {
 
     @PostMapping("/saveMovies")
     String saveMoviesPreferences(HttpServletRequest request) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         List<String> ids = Arrays.asList(MOVIES_IDS.split(","));
+        MovieProfileUpdater movieProfileUpdater = new MovieProfileUpdater(userRepository.findByUsername(authentication.getName()).getId(), ignoredMoviesRepository);
         for (String id : ids) {
-            System.out.println(tmdbApiConsumer.getMovie(id).getTitle() + ": " + request.getParameter(id));
+            movieProfileUpdater.modifyProfile(Long.parseLong(id), Integer.parseInt(request.getParameter(id)));
         }
-        return "redirect:/";
+        return "redirect:/preferences/series";
     }
 
     @RequestMapping("/series")
