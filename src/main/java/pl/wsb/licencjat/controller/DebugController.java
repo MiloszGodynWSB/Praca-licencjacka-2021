@@ -150,11 +150,6 @@ public class DebugController {
         return "redirect:/";
     }
 
-    @RequestMapping("/security")
-    String checkIfSecurityWorks() {
-        return "security";
-    }
-
     @RequestMapping("/checkIds")
     String checkIds() {
         List<String> moviesList = Arrays.asList(MOVIES_IDS.split(","));

@@ -37,7 +37,7 @@ public class TmdbSeries {
     }
 
     public String getPoster_path() {
-        return poster_path;
+        return "https://image.tmdb.org/t/p/w500"+poster_path;
     }
 
     @Override

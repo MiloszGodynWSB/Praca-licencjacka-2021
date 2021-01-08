@@ -3,11 +3,14 @@ package pl.wsb.licencjat.controller;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import pl.wsb.licencjat.model.tmdb.TmdbMovie;
 import pl.wsb.licencjat.model.tmdb.TmdbSeries;
 import pl.wsb.licencjat.services.TmdbApiConsumer;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
@@ -26,11 +29,25 @@ public class PreferencesController {
         this.tmdbApiConsumer = tmdbApiConsumer;
     }
 
-    @RequestMapping("")
-    String createPreferencesPage(Model model) {
+    @RequestMapping("/movies")
+    String createMoviesPreferencesPage(Model model) {
         model.addAttribute("movies", createTmdbMovies(Arrays.asList(MOVIES_IDS.split(","))));
+        return "preferencesMovies";
+    }
+
+    @PostMapping("/saveMovies")
+    String saveMoviesPreferences(HttpServletRequest request) {
+        List<String> ids = Arrays.asList(MOVIES_IDS.split(","));
+        for (String id : ids) {
+            System.out.println(tmdbApiConsumer.getMovie(id).getTitle() + ": " + request.getParameter(id));
+        }
+        return "redirect:/";
+    }
+
+    @RequestMapping("/series")
+    String createSeriesPreferencesPage(Model model) {
         model.addAttribute("series", createTmdbSeries(Arrays.asList(SERIES_IDS.split(","))));
-        return "preferences";
+        return "preferencesSeries";
     }
 
     private List<TmdbMovie> createTmdbMovies(List<String> ids) {
