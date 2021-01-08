@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Filmy | CBTO</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <link rel="stylesheet" href="/style.css"/>
+</head>
+<body>
+    <div th:replace="fragments :: header"></div><br><br>
+    <div class="content">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm">
+                    <img th:src="${random.poster_path}" width="300" height="424"><br><br>
+                    <h5 th:text="${random.title}">Losowy film</h5>
+                    <p><i th:text="${random.original_title}">Oryginalny tytuł</i></p><br>
+                    <p th:text="${random.overview}">Opis filmu</p>
+                </div>
+                <div class="col-sm">
+                    <div class="content">
+                        <form action="/movies/find">
+                            <button type="submit" name="random" th:value="${random.id}" class="btn btn-outline-success btn-lg">Znajdź mi film!</button>
+                        </form><br>
+                        <form action="/movies/filters">
+                            <input type="submit" class="btn btn-outline-primary" value="Przejdź do filtrów"><br><br>
+                        </form>
+                        <form action="/movies/similar" method="post">
+                            <fieldset>
+                                <legend>Znajdź film podobny do...</legend>
+                                <input type="text" name="title" placeholder="Tytuł filmu"><br><br>
+                                <input type="submit" class="btn btn-dark btn-sm" value="Szukaj">
+                            </fieldset>
+                        </form>
+                    </div>
+                </div>
+                <div class="col-sm">
+                    <img th:src="${movie.poster_path}" width="300" height="424"><br><br>
+                    <h5 th:text="${movie.title}">Znaleziony film</h5>
+                    <p><i th:text="${movie.original_title}">Oryginalny tytuł</i></p><br>
+                    <p th:text="${movie.overview}">Opis filmu</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm">
+                    <form method="post" th:action="@{/movies/random}" th:object="${movie}">
+                        <button name="movie" type="submit" class="btn btn-outline-primary" th:value="${movie.id}">Losuj następny film</button>
+                    </form>
+                </div>
+                <div class="col-sm">
+                </div>
+                <div class="col-sm">
+                    <div class="container">
+                        <form action="/movies/rate" method="post">
+                            <div class="row">
+                                <div class="col-sm">
+                                    <div class="content">
+                                        <button th:name="${movie.id}" th:id="${movie.id}" type="submit" class="btn btn-danger btn-sm" value="bad">Nie lubię</button>
+                                    </div>
+                                </div>
+                                <div class="col-sm">
+                                    <div class="content">
+                                        <button th:name="${movie.id}" th:id="${movie.id}" type="submit" class="btn btn-secondary btn-sm" value="ignore">Zignoruj</button>
+                                    </div>
+                                </div>
+                                <div class="col-sm">
+                                    <div class="content">
+                                        <button th:name="${movie.id}" th:id="${movie.id}" type="submit" class="btn btn-success btn-sm" value="good">Lubię</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -8,55 +8,65 @@
     <link rel="stylesheet" href="/style.css"/>
 </head>
 <body>
-    <div class="content"><br><br>
-        <h2>...jeszcze tylko chwilę!</h2>
-        <p>Potrzebujemy takich samych informacji odnośnie seriali. Potem już będziesz mógł delektować się sugestiami.</p>
-        <form method="post" action="/preferences/saveSeries">
-            <div th:each="serie: ${series}">
-                <fieldset>
-                    <legend th:text="${serie.name} + ' (' + ${serie.original_name} + ')'">Serial</legend>
-                    <!-- Multiple Radios -->
-                    <img th:src="${serie.poster_path}"><br><br>
-                    <p th:text="${serie.overview}">Opis</p>
-                    <div class="form-group">
-                        <label class="col-md-4 control-label" th:for="${serie.id}"></label>
-                        <div class="col-md-4">
-                            <div class="radio">
-                                <label th:for="${serie.id}">
-                                    <input type="radio" th:name="${serie.id}" th:id="${serie.id}" value="-2">
-                                    Oglądałem i nie podobało mi się
-                                </label>
-                            </div>
-                            <div class="radio">
-                                <label th:for="${serie.id}">
-                                    <input type="radio" th:name="${serie.id}" th:id="${serie.id}" value="-1">
-                                    Nie oglądałem i nie chcę
-                                </label>
-                            </div>
-                            <div class="radio">
-                                <label th:for="${serie.id}">
-                                    <input type="radio" th:name="${serie.id}" th:id="${serie.id}" value="0">
-                                    Nie jestem zainteresowany
-                                </label>
-                            </div>
-                            <div class="radio">
-                                <label th:for="${serie.id}">
-                                    <input type="radio" th:name="${serie.id}" th:id="${serie.id}" value="1">
-                                    Nie oglądałem i jestem zainteresowany
-                                </label>
-                            </div>
-                            <div class="radio">
-                                <label th:for="${serie.id}">
-                                    <input type="radio" th:name="${serie.id}" th:id="${serie.id}" value="2">
-                                    Oglądałem i podobało mi się
-                                </label>
-                            </div>
+<div class="content"><br><br>
+    <h2>Witaj nowy użytkowniku!</h2>
+    <p>Zanim zaczniesz korzystać z naszej aplikacji, potrzebujemy dowiedzieć się co Ty tak naprawdę lubisz. Poniżej znajduje
+        się zestaw wybranych filmów, na które prosimy byś odpowiedział. Ułatwi nam to dobieranie dla Ciebie filmów w
+        przyszłości.</p>
+    <form method="post" action="/preferences/saveSeries">
+        <div th:each="serie: ${series}">
+            <fieldset>
+                <legend th:text="${serie.name} + ' (' + ${serie.original_name} + ')'">Film</legend>
+                <!-- Multiple Radios -->
+                <div class="container">
+                    <div class="row">
+                        <div class="col">
+                            <img th:src="${serie.poster_path}"><br><br>
                         </div>
-                    </div><br>
-                </fieldset>
-            </div><br>
-            <input type="submit" value="Wyślij odpowiedzi">
-        </form>
-    </div>
+                        <div class="col">
+                            <p th:text="${serie.overview}">Opis</p><br><br>
+                            <div class="form-group">
+                                <label class="col-md-4 control-label" th:for="${serie.id}"></label>
+                                <div class="col-md-4">
+                                    <div class="radio">
+                                        <label th:for="${serie.id}">
+                                            <input type="radio" th:name="${serie.id}" th:id="${serie.id}" value="-2">
+                                            Oglądałem i nie podobało mi się
+                                        </label>
+                                    </div>
+                                    <div class="radio">
+                                        <label th:for="${serie.id}">
+                                            <input type="radio" th:name="${serie.id}" th:id="${serie.id}" value="-1">
+                                            Nie oglądałem i nie chcę
+                                        </label>
+                                    </div>
+                                    <div class="radio">
+                                        <label th:for="${serie.id}">
+                                            <input type="radio" th:name="${serie.id}" th:id="${serie.id}" value="0">
+                                            Nie jestem zainteresowany
+                                        </label>
+                                    </div>
+                                    <div class="radio">
+                                        <label th:for="${serie.id}">
+                                            <input type="radio" th:name="${serie.id}" th:id="${serie.id}" value="1">
+                                            Nie oglądałem i jestem zainteresowany
+                                        </label>
+                                    </div>
+                                    <div class="radio">
+                                        <label th:for="${serie.id}">
+                                            <input type="radio" th:name="${serie.id}" th:id="${serie.id}" value="2">
+                                            Oglądałem i podobało mi się
+                                        </label>
+                                    </div>
+                                </div>
+                            </div><br>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+        </div><br>
+        <input class="btn btn-outline-primary" type="submit" value="Wyślij odpowiedzi">
+    </form>
+</div>
 </body>
 </html>

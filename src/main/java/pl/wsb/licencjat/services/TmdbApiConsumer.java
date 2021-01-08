@@ -12,6 +12,7 @@ import pl.wsb.licencjat.model.tmdb.TmdbMovie;
 import pl.wsb.licencjat.model.tmdb.TmdbSeries;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class TmdbApiConsumer {
@@ -73,7 +74,7 @@ public class TmdbApiConsumer {
      * @return ArrayList with found ids
      */
     @SneakyThrows
-    public ArrayList<Long> searchMovie(String query) {
+    public List<Long> searchMovie(String query) {
         String builtQuery = buildUrlSearchMovie(query);
         var moviesResponse = restTemplate.exchange(
                 builtQuery,
@@ -83,7 +84,7 @@ public class TmdbApiConsumer {
 
         JSONObject jsnobj = new JSONObject(JsonString);
         JSONArray jsonArray = jsnobj.getJSONArray("results");
-        ArrayList<Long> movieIDs = new ArrayList<>();
+        List<Long> movieIDs = new ArrayList<>();
 
         for (int i = 0; i < jsonArray.length(); i++) {
             movieIDs.add(jsonArray.getJSONObject(i).getLong("id"));

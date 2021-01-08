@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Znalezione filmy | CBTO</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <link rel="stylesheet" href="/style.css"/>
+</head>
+<body>
+<div th:replace="fragments :: header"></div><br><br>
+<div class="content">
+    <h3 th:text="'Znaleziono więcej niż 1 film pasujący do Twojej frazy: ' + ${search}"></h3>
+    <table border="1">
+        <tr th:each="movie: ${movies}">
+            <td><a th:text="${movie.title}" th:href="@{/movie/find/{id}(id=${movie.id})}"></a></td>
+        </tr>
+    </table>
+</div>
+</body>
+</html>

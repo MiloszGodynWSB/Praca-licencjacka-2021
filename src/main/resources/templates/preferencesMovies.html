@@ -18,43 +18,51 @@
                 <fieldset>
                     <legend th:text="${movie.title} + ' (' + ${movie.original_title} + ')'">Film</legend>
                     <!-- Multiple Radios -->
-                    <img th:src="${movie.poster_path}"><br><br>
-                    <p th:text="${movie.overview}">Opis</p>
-                    <div class="form-group">
-                        <label class="col-md-4 control-label" th:for="${movie.id}"></label>
-                        <div class="col-md-4">
-                            <div class="radio">
-                                <label th:for="${movie.id}">
-                                    <input type="radio" th:name="${movie.id}" th:id="${movie.id}" value="-2">
-                                    Oglądałem i nie podobało mi się
-                                </label>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col">
+                                <img th:src="${movie.poster_path}"><br><br>
                             </div>
-                            <div class="radio">
-                                <label th:for="${movie.id}">
-                                    <input type="radio" th:name="${movie.id}" th:id="${movie.id}" value="-1">
-                                    Nie oglądałem i nie chcę
-                                </label>
-                            </div>
-                            <div class="radio">
-                                <label th:for="${movie.id}">
-                                    <input type="radio" th:name="${movie.id}" th:id="${movie.id}" value="0">
-                                    Nie jestem zainteresowany
-                                </label>
-                            </div>
-                            <div class="radio">
-                                <label th:for="${movie.id}">
-                                    <input type="radio" th:name="${movie.id}" th:id="${movie.id}" value="1">
-                                    Nie oglądałem i jestem zainteresowany
-                                </label>
-                            </div>
-                            <div class="radio">
-                                <label th:for="${movie.id}">
-                                    <input type="radio" th:name="${movie.id}" th:id="${movie.id}" value="2">
-                                    Oglądałem i podobało mi się
-                                </label>
+                            <div class="col">
+                                <p th:text="${movie.overview}">Opis</p><br><br>
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label" th:for="${movie.id}"></label>
+                                    <div class="col-md-4">
+                                        <div class="radio">
+                                            <label th:for="${movie.id}">
+                                                <input type="radio" th:name="${movie.id}" th:id="${movie.id}" value="-2">
+                                                Oglądałem i nie podobało mi się
+                                            </label>
+                                        </div>
+                                        <div class="radio">
+                                            <label th:for="${movie.id}">
+                                                <input type="radio" th:name="${movie.id}" th:id="${movie.id}" value="-1">
+                                                Nie oglądałem i nie chcę
+                                            </label>
+                                        </div>
+                                        <div class="radio">
+                                            <label th:for="${movie.id}">
+                                                <input type="radio" th:name="${movie.id}" th:id="${movie.id}" value="0">
+                                                Nie jestem zainteresowany
+                                            </label>
+                                        </div>
+                                        <div class="radio">
+                                            <label th:for="${movie.id}">
+                                                <input type="radio" th:name="${movie.id}" th:id="${movie.id}" value="1">
+                                                Nie oglądałem i jestem zainteresowany
+                                            </label>
+                                        </div>
+                                        <div class="radio">
+                                            <label th:for="${movie.id}">
+                                                <input type="radio" th:name="${movie.id}" th:id="${movie.id}" value="2">
+                                                Oglądałem i podobało mi się
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div><br>
                             </div>
                         </div>
-                    </div><br>
+                    </div>
                 </fieldset>
             </div><br>
             <input class="btn btn-outline-primary" type="submit" value="Wyślij odpowiedzi">
