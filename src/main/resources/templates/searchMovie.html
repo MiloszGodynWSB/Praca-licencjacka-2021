@@ -8,7 +8,8 @@
     <link rel="stylesheet" href="/style.css"/>
 </head>
 <body>
-<div th:replace="fragments :: header"></div><br><br>
+<div th:replace="fragments :: header"></div>
+<br><br>
 <div class="content">
     <h3 th:text="'Znaleziono więcej niż 1 film pasujący do Twojej frazy: ' + ${search}"></h3>
     <table border="1">

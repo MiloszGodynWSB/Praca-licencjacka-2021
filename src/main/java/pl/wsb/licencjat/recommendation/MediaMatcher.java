@@ -21,6 +21,7 @@ public abstract class MediaMatcher<T> {
 
     /**
      * Constructs MediaMatcher object for specified user
+     *
      * @param userID user that media matching will be done for. Needed for ignore list
      */
     public MediaMatcher(long userID) {
@@ -31,24 +32,30 @@ public abstract class MediaMatcher<T> {
     }
 
     protected abstract int calculateDotProduct(T media);
+
     protected abstract Double calculateMagnitude(T media);
+
     protected Double calculateSimilarity(T media) {
         return calculateDotProduct(media) / (mediaMagnitude * calculateMagnitude(media));
     }
 
     /**
      * Sets Media that other media will be compared to
+     *
      * @param mediaID
      */
     public abstract void setMainMedia(Long mediaID);
+
     protected abstract void getMediaToCompare();
+
     protected abstract void findSimilarMedia();
 
     /**
      * Finds the most similar media to the main one based on user ignore list
+     *
      * @return id of found media
      */
-    public Long getSimilarMedia(){
+    public Long getSimilarMedia() {
         getMediaToCompare();
         findSimilarMedia();
         return foundID;
