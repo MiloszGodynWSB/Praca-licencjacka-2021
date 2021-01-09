@@ -8,7 +8,7 @@ import java.util.SortedMap;
 
 public class MediaMatcherSeries extends MediaMatcher<Series> {
 
-    public MediaMatcherSeries(int userID) {
+    public MediaMatcherSeries(long userID) {
         super(userID);
         selectMediaQuery = "select c from " + "Series" + " c where ";
     }

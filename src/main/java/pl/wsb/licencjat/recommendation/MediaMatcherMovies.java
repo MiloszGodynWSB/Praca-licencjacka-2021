@@ -8,7 +8,7 @@ import java.util.SortedMap;
 
 public class MediaMatcherMovies extends MediaMatcher<Movie> {
 
-    public MediaMatcherMovies(int userID) {
+    public MediaMatcherMovies(long userID) {
         super(userID);
         selectMediaQuery = "select c from " + "Movie" + " c where ";
     }

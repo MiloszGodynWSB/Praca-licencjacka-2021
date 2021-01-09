@@ -13,7 +13,7 @@
     <h3 th:text="'Znaleziono więcej niż 1 film pasujący do Twojej frazy: ' + ${search}"></h3>
     <table border="1">
         <tr th:each="movie: ${movies}">
-            <td><a th:text="${movie.title}" th:href="@{/movie/find/{id}(id=${movie.id})}"></a></td>
+            <td><a th:text="${movie.title}" th:href="@{/movies/find/{id}(id=${movie.id})}"></a></td>
         </tr>
     </table>
 </div>

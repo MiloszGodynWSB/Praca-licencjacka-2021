@@ -10,7 +10,7 @@ import java.util.TreeMap;
 public abstract class MediaMatcher<T> {
     protected EntityManagerFactory emFactory;
     protected Long mediaID;
-    protected int userID;
+    protected long userID;
     protected T mainMedia;
     protected Double mediaMagnitude;
     protected List<T> mediaToCompare;
@@ -23,7 +23,7 @@ public abstract class MediaMatcher<T> {
      * Constructs MediaMatcher object for specified user
      * @param userID user that media matching will be done for. Needed for ignore list
      */
-    public MediaMatcher(int userID) {
+    public MediaMatcher(long userID) {
         emFactory = Persistence.createEntityManagerFactory("spring-jpa-pu");
         entityManager = emFactory.createEntityManager();
         results = new TreeMap<Long, Double>();
