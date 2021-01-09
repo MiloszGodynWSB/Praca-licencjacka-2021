@@ -31,4 +31,7 @@ create table seriesProfiles
                                         on delete cascade
 );
 
+alter table seriesprofiles alter column science_fiction set default 0;
+alter table seriesprofiles alter column tv_movie set default 0;
+
 
