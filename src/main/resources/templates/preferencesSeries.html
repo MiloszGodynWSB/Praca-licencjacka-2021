@@ -66,6 +66,7 @@
             </fieldset>
         </div><br>
         <input class="btn btn-outline-primary" type="submit" value="Wyślij odpowiedzi">
+        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
     </form>
 </div>
 </body>

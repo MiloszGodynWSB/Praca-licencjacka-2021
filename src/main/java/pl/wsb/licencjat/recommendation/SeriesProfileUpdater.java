@@ -2,11 +2,13 @@ package pl.wsb.licencjat.recommendation;
 
 import org.springframework.data.repository.CrudRepository;
 import pl.wsb.licencjat.model.database.IgnoredSeries;
+import pl.wsb.licencjat.model.database.MoviesProfiles;
 import pl.wsb.licencjat.model.database.Series;
 import pl.wsb.licencjat.model.database.SeriesProfiles;
 
 import javax.persistence.EntityTransaction;
 import javax.persistence.Query;
+import java.util.List;
 
 public class SeriesProfileUpdater extends ProfileUpdater<Series, SeriesProfiles> {
 
@@ -14,7 +16,13 @@ public class SeriesProfileUpdater extends ProfileUpdater<Series, SeriesProfiles>
         super(userID, repository);
         String userQuery = "select c from SeriesProfiles c where c.userID=" + userID;
         Query query = entityManager.createQuery(userQuery);
-        userData = (SeriesProfiles) query.getResultList().get(0);
+        List<SeriesProfiles> queryResult = query.getResultList();
+        if (!queryResult.isEmpty()) {
+            userData = (SeriesProfiles) query.getResultList().get(0);
+        } else {
+            userData = new SeriesProfiles();
+            userData.setUserID(userID);
+        }
     }
 
     public void modifyProfile(long mediaID, int score) {

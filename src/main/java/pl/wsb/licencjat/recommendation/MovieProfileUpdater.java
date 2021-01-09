@@ -7,6 +7,7 @@ import pl.wsb.licencjat.model.database.MoviesProfiles;
 
 import javax.persistence.EntityTransaction;
 import javax.persistence.Query;
+import java.util.List;
 
 public class MovieProfileUpdater extends ProfileUpdater<Movie, MoviesProfiles> {
 
@@ -14,7 +15,13 @@ public class MovieProfileUpdater extends ProfileUpdater<Movie, MoviesProfiles> {
         super(userID, repository);
         String userQuery = "select c from MoviesProfiles c where c.userID=" + userID;
         Query query = entityManager.createQuery(userQuery);
-        userData = (MoviesProfiles) query.getResultList().get(0);
+        List<MoviesProfiles> queryResult = query.getResultList();
+        if (!queryResult.isEmpty()) {
+            userData = (MoviesProfiles) query.getResultList().get(0);
+        } else {
+            userData = new MoviesProfiles();
+            userData.setUserID(userID);
+        }
     }
 
     public void modifyProfile(long mediaID, int score) {

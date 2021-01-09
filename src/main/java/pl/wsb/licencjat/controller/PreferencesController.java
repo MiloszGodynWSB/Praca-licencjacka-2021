@@ -10,7 +10,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import pl.wsb.licencjat.model.tmdb.TmdbMovie;
 import pl.wsb.licencjat.model.tmdb.TmdbSeries;
 import pl.wsb.licencjat.recommendation.MovieProfileUpdater;
+import pl.wsb.licencjat.recommendation.SeriesProfileUpdater;
 import pl.wsb.licencjat.repository.IgnoredMoviesRepository;
+import pl.wsb.licencjat.repository.IgnoredSeriesRepository;
 import pl.wsb.licencjat.repository.UserRepository;
 import pl.wsb.licencjat.services.TmdbApiConsumer;
 
@@ -29,11 +31,13 @@ public class PreferencesController {
     private String SERIES_IDS;
     private final TmdbApiConsumer tmdbApiConsumer;
     private IgnoredMoviesRepository ignoredMoviesRepository;
+    private IgnoredSeriesRepository ignoredSeriesRepository;
     private UserRepository userRepository;
 
-    public PreferencesController(IgnoredMoviesRepository ignoredMoviesRepository, TmdbApiConsumer tmdbApiConsumer, UserRepository userRepository) {
+    public PreferencesController(IgnoredMoviesRepository ignoredMoviesRepository, TmdbApiConsumer tmdbApiConsumer, IgnoredSeriesRepository ignoredSeriesRepository, UserRepository userRepository) {
         this.ignoredMoviesRepository = ignoredMoviesRepository;
         this.tmdbApiConsumer = tmdbApiConsumer;
+        this.ignoredSeriesRepository = ignoredSeriesRepository;
         this.userRepository = userRepository;
     }
 
@@ -50,8 +54,25 @@ public class PreferencesController {
         MovieProfileUpdater movieProfileUpdater = new MovieProfileUpdater(userRepository.findByUsername(authentication.getName()).getId(), ignoredMoviesRepository);
         for (String id : ids) {
             movieProfileUpdater.modifyProfile(Long.parseLong(id), Integer.parseInt(request.getParameter(id)));
+            if (!request.getParameter(id).equals("1")) {
+                movieProfileUpdater.addToIgnoreList(Long.parseLong(id));
+            }
         }
         return "redirect:/preferences/series";
+    }
+
+    @PostMapping("/saveSeries")
+    String saveSeriesPreferences(HttpServletRequest request) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        List<String> ids = Arrays.asList(SERIES_IDS.split(","));
+        SeriesProfileUpdater seriesProfileUpdater = new SeriesProfileUpdater(userRepository.findByUsername(authentication.getName()).getId(), ignoredSeriesRepository);
+        for (String id : ids) {
+            seriesProfileUpdater.modifyProfile(Long.parseLong(id), Integer.parseInt(request.getParameter(id)));
+            if (!request.getParameter(id).equals("1")) {
+                seriesProfileUpdater.addToIgnoreList(Long.parseLong(id));
+            }
+        }
+        return "redirect:/";
     }
 
     @RequestMapping("/series")
