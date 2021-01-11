@@ -79,7 +79,7 @@ public class MediaMatcherSeries extends MediaMatcher<Series> {
     protected void getMediaToCompare() {
         String selectMoviesQuery = selectMediaQuery + "not c.id=" + mediaID;
         selectMoviesQuery = selectMoviesQuery + " and c.id not in " +
-                "(Select d.movieID from IgnoredSeries d where d.id=" + userID + ")";
+                "(Select d.movieID from IgnoredSeries d where d.userID=" + userID + ")";
         System.out.println(selectMoviesQuery);
         Query query = entityManager.createQuery(selectMoviesQuery);
         mediaToCompare = query.getResultList();
